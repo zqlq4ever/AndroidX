@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -38,15 +39,58 @@ android {
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${Config.kotlinVersion}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Config.coroutinesVersion}"
+
+    testImplementation "junit:junit:${Config.junitVersion}"
+    androidTestImplementation "com.android.support.test:runner:${Config.runnerVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${Config.espressoVersion}"
+
+    implementation "com.google.android.material:material:${Config.materialVersion}"
+
+    implementation "androidx.core:core-ktx:${Config.coreVersion}"
+
+    implementation "androidx.appcompat:appcompat:${Config.appCompatVersion}"
+    implementation "androidx.activity:activity-ktx:${Config.activityVersion}"
+    implementation "androidx.fragment:fragment-ktx:${Config.fragmentVersion}"
+
+    implementation "androidx.constraintlayout:constraintlayout:${Config.constraintLayoutVersion}"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:${Config.coordinatorLayoutVersion}"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:${Config.swipeRefreshLayoutVersion}"
+    implementation "androidx.recyclerview:recyclerview:${Config.recyclerViewVersion}"
+
+    implementation "androidx.lifecycle:lifecycle-process:${Config.lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${Config.lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${Config.lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${Config.lifecycleVersion}"
+
+    implementation "androidx.room:room-runtime:${Config.roomVersion}"
+    implementation "androidx.room:room-ktx:${Config.roomVersion}"
+    kapt "androidx.room:room-compiler:${Config.roomVersion}"
+
+    implementation "com.squareup.okhttp3:okhttp:${Config.okHttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${Config.okHttpVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${Config.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-moshi:${Config.retrofitVersion}"
+
+    implementation "com.squareup.moshi:moshi:${Config.moshiVersion}"
+    implementation "com.squareup.moshi:moshi-kotlin:${Config.moshiVersion}"
+
+    implementation "io.coil-kt:coil:${Config.coilVersion}"
+    implementation "io.coil-kt:coil-gif:${Config.coilVersion}"
+    implementation "io.coil-kt:coil-svg:${Config.coilVersion}"
+    implementation "io.coil-kt:coil-video:${Config.coilVersion}"
+
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Config.brvhaVersion}"
+
+    implementation "com.hyman:flowlayout-lib:${Config.flowLayoutVersion}"
+    implementation "com.just.agentweb:agentweb:${Config.agentWebVersion}"
+    implementation "com.jeremyliao:live-event-bus-x:${Config.liveEventBusVersion}"
+    implementation "com.github.franmontiel:PersistentCookieJar:${Config.PersistentCookieJarVersion}"
+    implementation "com.youth.banner:banner:${Config.bannerVersion}"
 
     //  AndroidUtilCode
-    implementation 'com.blankj:utilcodex:1.30.5'
+    implementation "com.blankj:utilcodex:${Config.androidUtilCodeVersion}"
 }

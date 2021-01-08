@@ -1,8 +1,8 @@
-package com.example.gesturescaleandscroll
+package com.example.gesturescaleandscroll.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.gesturescaleandscroll.databinding.ActivityMainBinding
+import com.example.gesturescaleandscroll.R
 import com.example.gesturescaleandscroll.gesture.GestureScaleHelper
 import com.example.gesturescaleandscroll.uitls.WaterMarkUtil
 import kotlinx.android.synthetic.main.activity_main.*

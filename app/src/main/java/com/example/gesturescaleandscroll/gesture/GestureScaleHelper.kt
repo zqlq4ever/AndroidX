@@ -8,14 +8,21 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 
 @SuppressLint("ClickableViewAccessibility")
-class GestureScaleHelper private constructor(context: Context, private val viewGroup: ViewGroup, private val targetView: View) {
+class GestureScaleHelper private constructor(
+    context: Context,
+    private val viewGroup: ViewGroup,
+    private val targetView: View
+) {
 
     private val scaleGestureBinder: ScaleGestureBinder
     private val scrollGestureBinder: ScrollGestureBinder
-    private val scaleGestureListener: ScaleGestureListener = ScaleGestureListener(targetView, viewGroup)
-    private val scrollGestureListener: ScrollGestureListener = ScrollGestureListener(targetView, viewGroup)
+    private val scaleGestureListener: ScaleGestureListener =
+        ScaleGestureListener(targetView, viewGroup)
+    private val scrollGestureListener: ScrollGestureListener =
+        ScrollGestureListener(targetView, viewGroup)
     private var onScaleListener: OnScaleListener? = null
     private var isScaleEnd = true
+
     var isFullGroup = false
         set(isFullGroup) {
             field = isFullGroup
@@ -27,7 +34,7 @@ class GestureScaleHelper private constructor(context: Context, private val viewG
 
     companion object {
         fun bind(context: Context, viewGroup: ViewGroup, targetView: View): GestureScaleHelper =
-                GestureScaleHelper(context, viewGroup, targetView)
+            GestureScaleHelper(context, viewGroup, targetView)
     }
 
 
@@ -57,27 +64,27 @@ class GestureScaleHelper private constructor(context: Context, private val viewG
 
     private fun fullGroup() {
         targetView.viewTreeObserver.addOnPreDrawListener(
-                object : ViewTreeObserver.OnPreDrawListener {
-                    override fun onPreDraw(): Boolean {
-                        targetView.viewTreeObserver.removeOnPreDrawListener(this)
-                        val targetWidth = targetView.width.toFloat()
-                        val targetHeight = targetView.height.toFloat()
-                        val groupWidth = viewGroup.width.toFloat()
-                        val groupHeight = viewGroup.height.toFloat()
-                        val widthFactor = groupWidth / targetWidth
-                        val heightFactor = groupHeight / targetHeight
-                        targetView.layoutParams = targetView.layoutParams.also {
-                            if (targetWidth < groupWidth && widthFactor * targetHeight <= groupHeight) {
-                                it.width = groupWidth.toInt()
-                                it.height = (widthFactor * targetHeight).toInt()
-                            } else if (targetHeight < groupHeight && heightFactor * targetWidth <= groupWidth) {
-                                it.height = groupHeight.toInt()
-                                it.width = (heightFactor * targetWidth).toInt()
-                            }
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    targetView.viewTreeObserver.removeOnPreDrawListener(this)
+                    val targetWidth = targetView.width.toFloat()
+                    val targetHeight = targetView.height.toFloat()
+                    val groupWidth = viewGroup.width.toFloat()
+                    val groupHeight = viewGroup.height.toFloat()
+                    val widthFactor = groupWidth / targetWidth
+                    val heightFactor = groupHeight / targetHeight
+                    targetView.layoutParams = targetView.layoutParams.also {
+                        if (targetWidth < groupWidth && widthFactor * targetHeight <= groupHeight) {
+                            it.width = groupWidth.toInt()
+                            it.height = (widthFactor * targetHeight).toInt()
+                        } else if (targetHeight < groupHeight && heightFactor * targetWidth <= groupWidth) {
+                            it.height = groupHeight.toInt()
+                            it.width = (heightFactor * targetWidth).toInt()
                         }
-                        return true
                     }
-                })
+                    return true
+                }
+            })
     }
 
 

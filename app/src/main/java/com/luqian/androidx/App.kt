@@ -1,5 +1,6 @@
 package com.luqian.androidx
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 
@@ -12,11 +13,11 @@ import android.content.Context
 class App : Application() {
 
     companion object {
-        lateinit var context: Context
+        lateinit var mContext: Context
     }
 
     override fun onCreate() {
         super.onCreate()
-        context = this
+        mContext = this
     }
 }

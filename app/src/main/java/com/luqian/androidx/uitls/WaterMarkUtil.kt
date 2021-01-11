@@ -1,4 +1,4 @@
-package com.example.gesturescaleandscroll.uitls
+package com.luqian.androidx.uitls
 
 import android.app.Activity
 import android.graphics.Canvas

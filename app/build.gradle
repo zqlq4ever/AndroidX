@@ -45,8 +45,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Config.coroutinesVersion}"
 
     testImplementation "junit:junit:${Config.junitVersion}"
-    androidTestImplementation "com.android.support.test:runner:${Config.runnerVersion}"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:${Config.espressoVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${Config.runnerVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${Config.espressoVersion}"
 
     implementation "com.google.android.material:material:${Config.materialVersion}"
 
@@ -74,6 +74,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:${Config.okHttpVersion}"
     implementation "com.squareup.retrofit2:retrofit:${Config.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-moshi:${Config.retrofitVersion}"
+    implementation "com.google.code.gson:gson:${Config.gsonVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${Config.converterGsonVersion}"
 
     implementation "com.squareup.moshi:moshi:${Config.moshiVersion}"
     implementation "com.squareup.moshi:moshi-kotlin:${Config.moshiVersion}"

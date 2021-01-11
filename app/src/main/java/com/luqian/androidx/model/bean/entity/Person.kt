@@ -1,4 +1,4 @@
-package com.example.gesturescaleandscroll.model.bean
+package com.luqian.androidx.model.bean.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,7 +6,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 /**
- * 文件描述:
+ * 文件描述:Room 数据库表结构
  * 作者:  luqian
  * 创建时间:  2021/1/8
  *
@@ -23,8 +23,8 @@ class Person {
     @ColumnInfo(name = "user_age")
     var age: Int = 0
 
+    var userId: String = ""
+
     @Ignore
     var sex: String = "male"
-
-    var userId: String = ""
 }

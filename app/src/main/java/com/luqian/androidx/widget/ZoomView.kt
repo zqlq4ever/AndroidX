@@ -1,4 +1,4 @@
-package com.example.gesturescaleandscroll.widget
+package com.luqian.androidx.widget
 
 import android.content.Context
 import android.util.AttributeSet

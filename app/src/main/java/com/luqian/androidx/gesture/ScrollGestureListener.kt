@@ -1,4 +1,4 @@
-package com.example.gesturescaleandscroll.gesture
+package com.luqian.androidx.gesture
 
 import android.graphics.RectF
 import android.view.GestureDetector

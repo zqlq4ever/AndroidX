@@ -1,4 +1,4 @@
-package com.example.gesturescaleandscroll.gesture
+package com.luqian.androidx.gesture
 
 import android.annotation.SuppressLint
 import android.content.Context

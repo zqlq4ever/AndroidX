@@ -3,7 +3,8 @@ package com.luqian.androidx.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.LogUtils
-import com.example.gesturescaleandscroll.R
+import com.blankj.utilcode.util.TimeUtils
+import com.luqian.androidx.R
 import com.luqian.androidx.gesture.GestureScaleHelper
 import com.luqian.androidx.model.bean.entity.Person
 import com.luqian.androidx.model.room.TestDatabase
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //  添加水印
-        WaterMarkUtil.sInstance.show(this, "我是水印")
+        WaterMarkUtil.sInstance.show(this, TimeUtils.date2String(TimeUtils.getNowDate()))
 
         //  缩放 view
         GestureScaleHelper.bind(this, root, child).run {

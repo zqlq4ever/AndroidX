@@ -1,6 +1,5 @@
 package com.luqian.androidx.uitls
 
-import android.app.Activity
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.Paint
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.IntRange
 import com.blankj.utilcode.util.ConvertUtils
-import com.luqian.androidx.ui.MainActivity
+import com.luqian.androidx.ui.ScaleViewActivity
 import kotlin.math.sqrt
 
 /**
@@ -96,7 +95,7 @@ class WaterMarkUtil private constructor() {
      * 显示水印，铺满整个页面
      */
     @JvmOverloads
-    fun show(activity: MainActivity, text: String? = mText) {
+    fun show(activity: ScaleViewActivity, text: String? = mText) {
         val drawable = WatermarkDrawable()
         drawable.mText = text
         drawable.mTextColor = mTextColor

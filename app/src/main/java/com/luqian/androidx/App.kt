@@ -1,8 +1,8 @@
 package com.luqian.androidx
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import com.luqian.androidx.core.ActivityHelper
 
 /**
  * 文件描述:
@@ -19,5 +19,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         mContext = this
+        ActivityHelper.init(this)
     }
 }

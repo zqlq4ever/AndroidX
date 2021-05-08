@@ -46,4 +46,10 @@ object Config {
     const val bannerVersion = "1.4.10"
 
     const val androidUtilCodeVersion = "1.30.6"
+
+    const val RWidgetHelper = "0.0.9"
+
+    const val XPopup = "2.2.25"
+
+    const val ultimatebarx = "0.6.0"
 }

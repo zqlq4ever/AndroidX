@@ -83,13 +83,13 @@ dependencies {
     implementation "io.coil-kt:coil-video:${Config.coilVersion}"
 
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Config.brvhaVersion}"
-
     implementation "com.hyman:flowlayout-lib:${Config.flowLayoutVersion}"
-    implementation "com.just.agentweb:agentweb:${Config.agentWebVersion}"
+    implementation "com.github.Justson.AgentWeb:agentweb-core:${Config.agentWebVersion}"
     implementation "com.jeremyliao:live-event-bus-x:${Config.liveEventBusVersion}"
     implementation "com.github.franmontiel:PersistentCookieJar:${Config.PersistentCookieJarVersion}"
     implementation "com.youth.banner:banner:${Config.bannerVersion}"
-
-    //  AndroidUtilCode
     implementation "com.blankj:utilcodex:${Config.androidUtilCodeVersion}"
+    implementation "com.ruffian.library:RWidgetHelper-AndroidX:${Config.RWidgetHelper}"
+    implementation "com.github.li-xiaojun:XPopup:${Config.XPopup}"
+    implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
 }

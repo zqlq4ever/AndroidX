@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.luqian.androidx.R
-import com.luqian.androidx.databinding.ActivityMainBinding
+import com.luqian.androidx.databinding.ActivityScaleBinding
 import com.luqian.androidx.gesture.GestureScaleHelper
 import com.luqian.androidx.model.bean.entity.Person
 import com.luqian.androidx.model.room.TestDatabase
@@ -16,13 +16,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : AppCompatActivity() {
+class ScaleViewActivity : AppCompatActivity() {
 
-    lateinit var bind: ActivityMainBinding;
+    lateinit var bind: ActivityScaleBinding;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        bind = DataBindingUtil.setContentView(this, R.layout.activity_scale)
 
         //  添加水印
         WaterMarkUtil.sInstance.show(this, TimeUtils.date2String(TimeUtils.getNowDate()))

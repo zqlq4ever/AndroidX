@@ -15,20 +15,22 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
-        android:name="com.luqian.androidx.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GestureScaleAndScroll">
-        <activity android:name="com.luqian.androidx.ui.MainActivity">
+        android:theme="@style/Theme.Androidx">
+        <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.CornerActivity" />
+        <activity android:name=".ui.ScaleViewActivity" />
     </application>
 
 </manifest>

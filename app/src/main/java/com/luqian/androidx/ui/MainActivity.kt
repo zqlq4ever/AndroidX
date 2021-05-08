@@ -2,29 +2,33 @@ package com.luqian.androidx.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.luqian.androidx.R
+import com.luqian.androidx.databinding.ActivityMainBinding
 import com.luqian.androidx.gesture.GestureScaleHelper
 import com.luqian.androidx.model.bean.entity.Person
 import com.luqian.androidx.model.room.TestDatabase
 import com.luqian.androidx.uitls.WaterMarkUtil
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var bind: ActivityMainBinding;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         //  添加水印
         WaterMarkUtil.sInstance.show(this, TimeUtils.date2String(TimeUtils.getNowDate()))
 
         //  缩放 view
-        GestureScaleHelper.bind(this, root, child).run {
+        GestureScaleHelper.bind(this, bind.root, bind.child).run {
             isFullGroup = true
         }
 

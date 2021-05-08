@@ -4,10 +4,11 @@ buildscript {
         maven { url "https://maven.aliyun.com/repository/jcenter" }
         maven { url "https://maven.aliyun.com/repository/public" }
         google()
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.android.tools.build:gradle:4.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Config.kotlinVersion}"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -21,6 +22,7 @@ allprojects {
         maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://jitpack.io" }
         google()
+        mavenCentral()
         jcenter()
     }
 }

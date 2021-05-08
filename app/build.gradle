@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -32,8 +31,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -49,9 +48,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:${Config.espressoVersion}"
 
     implementation "com.google.android.material:material:${Config.materialVersion}"
-
     implementation "androidx.core:core-ktx:${Config.coreVersion}"
-
     implementation "androidx.appcompat:appcompat:${Config.appCompatVersion}"
     implementation "androidx.activity:activity-ktx:${Config.activityVersion}"
     implementation "androidx.fragment:fragment-ktx:${Config.fragmentVersion}"

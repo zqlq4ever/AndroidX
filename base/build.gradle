@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libserial_port.so'
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.tencent:mmkv-static:1.2.9'
+    runtimeOnly 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
+    runtimeOnly 'androidx.lifecycle:lifecycle-livedata:2.3.1'
+    implementation 'androidx.room:room-runtime:2.3.0'
+    runtimeOnly 'androidx.room:room-common:2.3.0'
+
+    implementation 'com.alibaba:arouter-api:1.5.2'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    implementation 'com.github.li-xiaojun:XPopup:2.4.3'
+    api 'com.elvishew:xlog:1.10.0'
+    implementation 'com.airbnb.android:lottie:3.7.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
+
+    api "com.github.princekin-f:EasyFloat:${Config.EasyFloat}"
+    api "com.github.RuffianZhong:RWidgetHelper:${Config.RWidgetHelper}"
+    api "org.greenrobot:eventbus:${Config.eventbus}"
+    api "com.permissionx.guolindev:permissionx:${Config.permissionx}"
+
+    //  网络请求
+    implementation "com.squareup.okhttp3:okhttp:${Config.okHttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${Config.okHttpVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${Config.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-moshi:${Config.retrofitVersion}"
+    implementation "com.google.code.gson:gson:${Config.gsonVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${Config.converterGsonVersion}"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+
+}

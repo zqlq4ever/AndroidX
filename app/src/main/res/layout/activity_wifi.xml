@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android = "http://schemas.android.com/apk/res/android"
+        xmlns:app = "http://schemas.android.com/apk/res-auto"
+        xmlns:tools = "http://schemas.android.com/tools">
+    
+    <data>
+    
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent">
+        
+        <com.ruffian.library.widget.RTextView
+            android:id = "@+id/tv_refresh_wifi"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "@dimen/dp_20"
+            android:clickable = "true"
+            android:gravity = "center"
+            android:padding = "@dimen/dp_8"
+            android:text = "刷新"
+            android:textColor = "@color/colorPrimary"
+            android:textSize = "@dimen/sp_15"
+            app:background_normal = "@color/gray8"
+            app:corner_radius = "@dimen/dp_5"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent"
+            app:ripple = "true"
+            app:ripple_color = "@color/colorPrimaryDark" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id = "@+id/rv_wifi"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:layout_margin = "@dimen/dp_20"
+            android:layout_marginStart = "20dp"
+            android:layout_marginTop = "16dp"
+            android:orientation = "vertical"
+            android:overScrollMode = "never"
+            app:layoutManager = "androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constrainedHeight = "true"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@id/tv_refresh_wifi"
+            app:layout_constraintVertical_bias = "0"
+            tools:itemCount = "5"
+            tools:listitem = "@layout/item_wifi" />
+    
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

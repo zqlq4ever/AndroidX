@@ -8,6 +8,7 @@ import com.luqian.androidx.core.ActivityHelper
 import com.luqian.androidx.databinding.ActivityHomeBinding
 import com.luqian.androidx.ui.CornerActivity
 import com.luqian.androidx.ui.ScaleViewActivity
+import com.luqian.androidx.ui.wifi.WifiActivity
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var bind: ActivityHomeBinding
@@ -20,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
                 when (position) {
                     0 -> ActivityHelper.startActivity(ScaleViewActivity::class.java)
                     1 -> ActivityHelper.startActivity(CornerActivity::class.java)
+                    2 -> ActivityHelper.startActivity(WifiActivity::class.java)
                 }
             }
         }
@@ -27,7 +29,8 @@ class HomeActivity : AppCompatActivity() {
         menuAdapter.setList(
             arrayListOf(
                 "手势旋转缩放 view",
-                "view 圆角"
+                "view 圆角",
+                "wifi"
             )
         )
     }

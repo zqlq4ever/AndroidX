@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
+    android:layout_width = "120dp"
+    android:layout_height = "120dp">
+    
+    <ImageView
+        android:id = "@+id/iv_loading"
+        android:layout_width = "40dp"
+        android:layout_height = "40dp"
+        android:src = "@mipmap/ic_loading"
+        app:layout_constraintBottom_toTopOf = "@id/tv_loading_tx"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toTopOf = "parent" />
+    
+    <TextView
+        android:id = "@+id/tv_loading_tx"
+        android:layout_width = "0dp"
+        android:layout_height = "wrap_content"
+        android:gravity = "center"
+        android:maxLines = "1"
+        android:text = "玩命加载中..."
+        android:textColor = "@color/black"
+        android:textSize = "14sp"
+        app:layout_constraintBottom_toBottomOf = "parent"
+        app:layout_constraintEnd_toEndOf = "parent"
+        app:layout_constraintStart_toStartOf = "parent"
+        app:layout_constraintTop_toBottomOf = "@id/iv_loading" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

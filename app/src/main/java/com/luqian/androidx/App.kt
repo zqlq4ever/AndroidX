@@ -1,7 +1,7 @@
 package com.luqian.androidx
 
-import android.app.Application
 import android.content.Context
+import com.fubao.baselibrary.BaseApplication
 import com.luqian.androidx.core.ActivityHelper
 
 /**
@@ -10,7 +10,7 @@ import com.luqian.androidx.core.ActivityHelper
  * 创建时间:  2021/1/8
  *
  */
-class App : Application() {
+class App : BaseApplication() {
 
     companion object {
         lateinit var mContext: Context

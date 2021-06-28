@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.luqian.androidx"
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -42,6 +42,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${Config.kotlinVersion}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Config.coroutinesVersion}"
+    implementation project(path: ':base')
 
     testImplementation "junit:junit:${Config.junitVersion}"
     androidTestImplementation "androidx.test.ext:junit:${Config.runnerVersion}"
@@ -89,7 +90,7 @@ dependencies {
     implementation "com.github.franmontiel:PersistentCookieJar:${Config.PersistentCookieJarVersion}"
     implementation "com.youth.banner:banner:${Config.bannerVersion}"
     implementation "com.blankj:utilcodex:${Config.androidUtilCodeVersion}"
-    implementation "com.ruffian.library:RWidgetHelper-AndroidX:${Config.RWidgetHelper}"
     implementation "com.github.li-xiaojun:XPopup:${Config.XPopup}"
+    implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
     implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
 }

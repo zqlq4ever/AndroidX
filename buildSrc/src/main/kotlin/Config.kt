@@ -47,9 +47,17 @@ object Config {
 
     const val androidUtilCodeVersion = "1.30.6"
 
-    const val RWidgetHelper = "0.0.9"
+    const val RWidgetHelper = "androidx.v0.0.1"
 
     const val XPopup = "2.2.25"
 
     const val ultimatebarx = "0.6.0"
+
+    const val EasyFloat = "2.0.2"
+
+    const val lottie = "3.7.0"
+
+    const val permissionx = "1.4.0"
+    
+    const val eventbus = "3.2.0"
 }

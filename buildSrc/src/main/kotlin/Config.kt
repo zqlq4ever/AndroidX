@@ -21,10 +21,10 @@ object Config {
     const val constraintLayoutVersion = "2.0.4"
     const val coordinatorLayoutVersion = "1.1.0"
     const val swipeRefreshLayoutVersion = "1.1.0"
-    const val recyclerViewVersion = "1.1.0"
+    const val recyclerViewVersion = "1.2.0"
 
-    const val lifecycleVersion = "2.2.0"
-    const val roomVersion = "2.2.6"
+    const val lifecycleVersion = "2.3.1"
+    const val roomVersion = "2.3.0"
 
     const val retrofitVersion = "2.9.0"
     const val okHttpVersion = "4.9.0"
@@ -34,6 +34,14 @@ object Config {
     const val PersistentCookieJarVersion = "v1.0.1"
 
     const val coilVersion = "1.2.1"
+
+    const val xlog = "1.10.0"
+
+    const val immersionbar = "3.0.0"
+
+    const val arouter = "1.5.2"
+
+    const val mmkv = "1.2.9"
 
     const val brvhaVersion = "3.0.6"
 
@@ -49,7 +57,7 @@ object Config {
 
     const val RWidgetHelper = "androidx.v0.0.1"
 
-    const val XPopup = "2.2.25"
+    const val XPopup = "2.4.3"
 
     const val ultimatebarx = "0.6.0"
 
@@ -58,6 +66,6 @@ object Config {
     const val lottie = "3.7.0"
 
     const val permissionx = "1.4.0"
-    
+
     const val eventbus = "3.2.0"
 }

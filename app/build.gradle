@@ -44,11 +44,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Config.coroutinesVersion}"
     implementation project(path: ':base')
 
-    testImplementation "junit:junit:${Config.junitVersion}"
-    androidTestImplementation "androidx.test.ext:junit:${Config.runnerVersion}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${Config.espressoVersion}"
-
-    implementation "com.google.android.material:material:${Config.materialVersion}"
     implementation "androidx.core:core-ktx:${Config.coreVersion}"
     implementation "androidx.appcompat:appcompat:${Config.appCompatVersion}"
     implementation "androidx.activity:activity-ktx:${Config.activityVersion}"
@@ -64,7 +59,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${Config.lifecycleVersion}"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${Config.lifecycleVersion}"
 
-    implementation "androidx.room:room-runtime:${Config.roomVersion}"
     implementation "androidx.room:room-ktx:${Config.roomVersion}"
     kapt "androidx.room:room-compiler:${Config.roomVersion}"
 
@@ -83,14 +77,13 @@ dependencies {
     implementation "io.coil-kt:coil-svg:${Config.coilVersion}"
     implementation "io.coil-kt:coil-video:${Config.coilVersion}"
 
-    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Config.brvhaVersion}"
+
     implementation "com.hyman:flowlayout-lib:${Config.flowLayoutVersion}"
     implementation "com.github.Justson.AgentWeb:agentweb-core:${Config.agentWebVersion}"
     implementation "com.jeremyliao:live-event-bus-x:${Config.liveEventBusVersion}"
     implementation "com.github.franmontiel:PersistentCookieJar:${Config.PersistentCookieJarVersion}"
     implementation "com.youth.banner:banner:${Config.bannerVersion}"
     implementation "com.blankj:utilcodex:${Config.androidUtilCodeVersion}"
-    implementation "com.github.li-xiaojun:XPopup:${Config.XPopup}"
     implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
     implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
 }

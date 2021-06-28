@@ -43,24 +43,23 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'com.tencent:mmkv-static:1.2.9'
     runtimeOnly 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
     runtimeOnly 'androidx.lifecycle:lifecycle-livedata:2.3.1'
-    implementation 'androidx.room:room-runtime:2.3.0'
     runtimeOnly 'androidx.room:room-common:2.3.0'
 
-    implementation 'com.alibaba:arouter-api:1.5.2'
-    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
-    implementation 'com.github.li-xiaojun:XPopup:2.4.3'
-    api 'com.elvishew:xlog:1.10.0'
-    implementation 'com.airbnb.android:lottie:3.7.0'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
+    api "com.google.android.material:material:${Config.materialVersion}"
 
+    api "com.tencent:mmkv-static:${Config.mmkv}"
+    api "com.alibaba:arouter-api:${Config.arouter}"
+    api "com.gyf.immersionbar:immersionbar:${Config.immersionbar}"
+    api "com.elvishew:xlog:${Config.xlog}"
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:${Config.brvhaVersion}"
+    api "com.airbnb.android:lottie:${Config.lottie}"
     api "com.github.princekin-f:EasyFloat:${Config.EasyFloat}"
     api "com.github.RuffianZhong:RWidgetHelper:${Config.RWidgetHelper}"
     api "org.greenrobot:eventbus:${Config.eventbus}"
     api "com.permissionx.guolindev:permissionx:${Config.permissionx}"
+    api "com.github.li-xiaojun:XPopup:${Config.XPopup}"
 
     //  网络请求
     implementation "com.squareup.okhttp3:okhttp:${Config.okHttpVersion}"

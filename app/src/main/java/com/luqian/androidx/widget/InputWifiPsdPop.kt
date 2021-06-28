@@ -1,64 +1,51 @@
-package com.luqian.androidx.widget;
+package com.luqian.androidx.widget
 
-import android.annotation.SuppressLint;
-import android.widget.EditText;
-
-import androidx.annotation.NonNull;
-
-import com.luqian.androidx.R;
-import com.luqian.androidx.ui.wifi.WifiActivity;
-import com.lxj.xpopup.core.CenterPopupView;
+import android.annotation.SuppressLint
+import android.view.View
+import android.widget.EditText
+import com.luqian.androidx.R
+import com.luqian.androidx.ui.wifi.WifiActivity
+import com.lxj.xpopup.core.CenterPopupView
 
 /**
  * @author Administrator
  * @date 2021/6/28
  */
 @SuppressLint("ViewConstructor")
-public class InputWifiPsdPop extends CenterPopupView {
+class InputWifiPsdPop(private val context: WifiActivity) : CenterPopupView(context) {
 
-    private EditText mEtWifiPsd;
-    private WifiActivity context;
-    private final String data = "";
+    private var mEtWifiPsd: EditText? = null
+
+    private val data = ""
 
 
-    public InputWifiPsdPop(@NonNull WifiActivity context) {
-        super(context);
-        this.context = context;
+    override fun getImplLayoutId(): Int {
+        return R.layout.pop_input_wifi_psd
     }
 
 
-    @Override
-    protected int getImplLayoutId() {
-        return R.layout.pop_input_wifi_psd;
-    }
-
-
-    @Override
-    protected void onCreate() {
-        super.onCreate();
-        mEtWifiPsd = findViewById(R.id.et_wifi_psd);
-        findViewById(R.id.tv_connect).setOnClickListener(v -> {
-            context.connect(getPassword());
-            dismiss();
-        });
-    }
-
-
-    @Override
-    protected void doAfterDismiss() {
-        super.doAfterDismiss();
-        clear();
-    }
-
-
-    public void clear() {
-        if (mEtWifiPsd != null) {
-            mEtWifiPsd.setText(data);
+    override fun onCreate() {
+        super.onCreate()
+        mEtWifiPsd = findViewById(R.id.et_wifi_psd)
+        findViewById<View>(R.id.tv_connect).setOnClickListener { v: View? ->
+            context.connect(password)
+            dismiss()
         }
     }
 
 
-    public String getPassword() {
-        return mEtWifiPsd.getText().toString();
+    override fun doAfterDismiss() {
+        super.doAfterDismiss()
+        clear()
     }
+
+
+    private fun clear() {
+        if (mEtWifiPsd != null) {
+            mEtWifiPsd!!.setText(data)
+        }
+    }
+
+    private val password: String
+        get() = mEtWifiPsd?.text.toString()
 }

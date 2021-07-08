@@ -3,6 +3,7 @@ package com.luqian.androidx.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import coil.load
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.luqian.androidx.R
@@ -26,6 +27,8 @@ class ScaleViewActivity : AppCompatActivity() {
 
         //  添加水印
         WaterMarkUtil.sInstance.show(this, TimeUtils.date2String(TimeUtils.getNowDate()))
+
+        bind.child.load("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1977046168,368269341&fm=26&gp=0.jpg")
 
         //  缩放 view
         GestureScaleHelper.bind(this, bind.root, bind.child).run {

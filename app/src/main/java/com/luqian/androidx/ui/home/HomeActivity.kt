@@ -11,6 +11,7 @@ import com.luqian.androidx.ui.ScaleViewActivity
 import com.luqian.androidx.ui.wifi.WifiActivity
 
 class HomeActivity : AppCompatActivity() {
+
     private lateinit var bind: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
         bind.rvMenu.adapter = menuAdapter
         menuAdapter.setList(
             arrayListOf(
-                "手势旋转缩放 view",
+                "view 手势旋转缩放 ",
                 "view 圆角",
                 "wifi"
             )

@@ -86,4 +86,5 @@ dependencies {
     implementation "com.blankj:utilcodex:${Config.androidUtilCodeVersion}"
     implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
     implementation "com.zackratos.ultimatebarx:ultimatebarx:${Config.ultimatebarx}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${Config.glide}"
 }

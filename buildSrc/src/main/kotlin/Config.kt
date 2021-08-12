@@ -1,6 +1,6 @@
 object Config {
-    const val kotlinVersion = "1.5.0"
-    const val coroutinesVersion = "1.5.0-RC"
+    const val kotlinVersion = "1.5.21"
+    const val coroutinesVersion = "1.5.1"
 
     const val buildToolsVersion = "30.0.3"
     const val compileSdkVersion = 30
@@ -55,9 +55,11 @@ object Config {
 
     const val androidUtilCodeVersion = "1.30.6"
 
-    const val RWidgetHelper = "androidx.v0.0.1"
+    const val RWidgetHelper = "androidx.v0.0.3"
 
-    const val XPopup = "2.4.3"
+    const val XPopup = "2.5.8"
+
+    const val glide = "4.12.0"
 
     const val ultimatebarx = "0.6.0"
 
@@ -65,7 +67,7 @@ object Config {
 
     const val lottie = "3.7.0"
 
-    const val permissionx = "1.4.0"
+    const val permissionx = "1.5.0"
 
     const val eventbus = "3.2.0"
 }

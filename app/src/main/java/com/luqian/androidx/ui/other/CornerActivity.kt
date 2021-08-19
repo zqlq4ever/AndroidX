@@ -1,4 +1,4 @@
-package com.luqian.androidx.ui
+package com.luqian.androidx.ui.other
 
 import android.Manifest
 import android.content.ContentValues

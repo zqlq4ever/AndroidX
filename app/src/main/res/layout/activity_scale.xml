@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.luqian.androidx.ui.ScaleViewActivity">
+        tools:context="com.luqian.androidx.ui.other.ScaleViewActivity">
 
         <FrameLayout
             android:id="@+id/root"

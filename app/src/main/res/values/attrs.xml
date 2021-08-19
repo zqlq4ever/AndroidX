@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name = "mSpreadView">
+        <attr name = "color" format = "color" />
+        <attr name = "speed" format = "integer" />
+        <attr name = "gap" format = "float" />
+        <attr name = "isFill" format = "boolean" />
+    </declare-styleable>
+</resources>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidX</string>
+    <string name = "photo_tips">点击图片可进行拍照</string>
 </resources>

@@ -11,7 +11,18 @@
         android:layout_width = "match_parent"
         android:layout_height = "match_parent"
         android:background = "@color/black"
-        tools:context = ".ui.CornerActivity">
+        tools:context = ".ui.other.CornerActivity">
+        
+        <TextView
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginTop = "@dimen/dp_30"
+            android:text = "@string/photo_tips"
+            android:textColor = "@color/white"
+            android:textSize = "@dimen/sp_30"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent" />
         
         <ImageView
             android:id = "@+id/iv_photo"

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.IntRange
 import com.blankj.utilcode.util.ConvertUtils
-import com.luqian.androidx.ui.ScaleViewActivity
+import com.luqian.androidx.ui.other.ScaleViewActivity
 import kotlin.math.sqrt
 
 /**

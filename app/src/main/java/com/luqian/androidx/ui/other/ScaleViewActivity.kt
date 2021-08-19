@@ -1,4 +1,4 @@
-package com.luqian.androidx.ui
+package com.luqian.androidx.ui.other
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

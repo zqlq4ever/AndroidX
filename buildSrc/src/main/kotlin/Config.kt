@@ -1,6 +1,6 @@
 object Config {
-    const val kotlinVersion = "1.5.21"
-    const val coroutinesVersion = "1.5.1"
+    const val kotlinVersion = "1.6.0"
+    const val coroutinesVersion = "1.6.0"
 
     const val buildToolsVersion = "30.0.3"
     const val compileSdkVersion = 30
@@ -11,19 +11,19 @@ object Config {
     const val runnerVersion = "1.1.2"
     const val espressoVersion = "3.3.0"
 
-    const val materialVersion = "1.3.0"
+    const val materialVersion = "1.4.0"
 
-    const val coreVersion = "1.3.2"
-    const val activityVersion = "1.2.2"
-    const val fragmentVersion = "1.3.3"
-    const val appCompatVersion = "1.2.0"
+    const val coreVersion = "1.7.0"
+    const val activityVersion = "1.4.0"
+    const val fragmentVersion = "1.4.0"
+    const val appCompatVersion = "1.4.0"
 
-    const val constraintLayoutVersion = "2.0.4"
+    const val constraintLayoutVersion = "2.1.2"
     const val coordinatorLayoutVersion = "1.1.0"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val recyclerViewVersion = "1.2.0"
 
-    const val lifecycleVersion = "2.3.1"
+    const val lifecycleVersion = "2.4.0"
     const val roomVersion = "2.3.0"
 
     const val retrofitVersion = "2.9.0"
@@ -41,7 +41,7 @@ object Config {
 
     const val arouter = "1.5.2"
 
-    const val mmkv = "1.2.9"
+    const val mmkv = "1.2.11"
 
     const val brvhaVersion = "3.0.6"
 
@@ -67,7 +67,7 @@ object Config {
 
     const val lottie = "3.7.0"
 
-    const val permissionx = "1.5.0"
+    const val permissionx = "1.6.1"
 
     const val eventbus = "3.2.0"
 }

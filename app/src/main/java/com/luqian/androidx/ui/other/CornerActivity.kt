@@ -55,7 +55,7 @@ class CornerActivity : AppCompatActivity() {
                     Manifest.permission.CAMERA,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 )
-                .onForwardToSettings { scope: ForwardScope, deniedList: List<String?>? ->
+                .onForwardToSettings { scope: ForwardScope, deniedList: List<String> ->
                     scope.showForwardToSettingsDialog(
                         deniedList,
                         "请在设置中开启授权",

@@ -9,6 +9,7 @@ import com.luqian.androidx.R
 import com.luqian.androidx.core.ActivityHelper
 import com.luqian.androidx.databinding.ActivityHomeBinding
 import com.luqian.androidx.ui.camerax.CameraActivity
+import com.luqian.androidx.ui.ecg.EcgActivity
 import com.luqian.androidx.ui.other.CornerActivity
 import com.luqian.androidx.ui.other.ScaleViewActivity
 import com.luqian.androidx.ui.wifi.WifiActivity
@@ -49,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
                                 }
                             }
                     }
+                    4 -> ActivityHelper.startActivity(EcgActivity::class.java)
                 }
             }
         }
@@ -59,6 +61,7 @@ class HomeActivity : AppCompatActivity() {
                 "view 圆角",
                 "wifi",
                 "CameraX",
+                "心电图",
             )
         )
     }

@@ -50,6 +50,10 @@
         <activity android:name = ".ui.other.ScaleViewActivity" />
         
         <activity
+            android:name = ".ui.ecg.EcgActivity"
+            android:screenOrientation = "landscape" />
+        
+        <activity
             android:name = ".ui.camerax.CameraActivity"
             android:screenOrientation = "portrait" />
     

@@ -35,7 +35,9 @@
         android:usesCleartextTraffic = "true"
         tools:targetApi = "m">
         
-        <activity android:name = ".ui.home.HomeActivity">
+        <activity
+            android:name = ".ui.home.HomeActivity"
+            android:exported = "true">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
                 

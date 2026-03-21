@@ -29,7 +29,7 @@ class ScrollGestureListener internal constructor(private val targetView: View, p
     var isFullGroup = false
 
 
-    override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
+    override fun onScroll(e1: MotionEvent?, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
         var disX = distanceX
         var disY = distanceY
         disX = -disX

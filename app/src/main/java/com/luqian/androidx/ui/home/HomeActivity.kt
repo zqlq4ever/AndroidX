@@ -23,39 +23,38 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        val menuAdapter = MenuAdapter().apply {
-            setOnItemClickListener { _, _, position ->
-                when (position) {
-                    0 -> ActivityHelper.startActivity(ScaleViewActivity::class.java)
-                    1 -> ActivityHelper.startActivity(CornerActivity::class.java)
-                    2 -> ActivityHelper.startActivity(WifiActivity::class.java)
-                    3 -> {
-                        PermissionX.init(this@HomeActivity)
-                            .permissions(
-                                Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        val menuAdapter = MenuAdapter()
+        menuAdapter.setOnItemClickListener { _, _, position ->
+            when (position) {
+                0 -> ActivityHelper.startActivity(ScaleViewActivity::class.java)
+                1 -> ActivityHelper.startActivity(CornerActivity::class.java)
+                2 -> ActivityHelper.startActivity(WifiActivity::class.java)
+                3 -> {
+                    PermissionX.init(this@HomeActivity)
+                        .permissions(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        )
+                        .onForwardToSettings { scope: ForwardScope, deniedList: List<String> ->
+                            scope.showForwardToSettingsDialog(
+                                deniedList,
+                                "请在设置中开启授权",
+                                "去设置权限"
                             )
-                            .onForwardToSettings { scope: ForwardScope, deniedList: List<String> ->
-                                scope.showForwardToSettingsDialog(
-                                    deniedList,
-                                    "请在设置中开启授权",
-                                    "去设置权限"
-                                )
+                        }
+                        .request { allGranted: Boolean, _, _ ->
+                            if (allGranted) {
+                                ActivityHelper.startActivity(CameraActivity::class.java)
+                            } else {
+                                ToastUtils.showShort("请先授权")
                             }
-                            .request { allGranted: Boolean, _, _ ->
-                                if (allGranted) {
-                                    ActivityHelper.startActivity(CameraActivity::class.java)
-                                } else {
-                                    ToastUtils.showShort("请先授权")
-                                }
-                            }
-                    }
-                    4 -> ActivityHelper.startActivity(EcgActivity::class.java)
+                        }
                 }
+                4 -> ActivityHelper.startActivity(EcgActivity::class.java)
             }
         }
         bind.rvMenu.adapter = menuAdapter
-        menuAdapter.setList(
+        menuAdapter.submitList(
             arrayListOf(
                 "view 手势旋转缩放 ",
                 "view 圆角",

@@ -22,7 +22,6 @@ import com.luqian.androidx.databinding.ActivityCornerBinding
 import com.luqian.androidx.ext.dpToPx
 import com.permissionx.guolindev.PermissionX
 import com.permissionx.guolindev.request.ForwardScope
-import com.zackratos.ultimatebarx.ultimatebarx.UltimateBarX
 import java.io.File
 
 class CornerActivity : AppCompatActivity() {
@@ -39,9 +38,6 @@ class CornerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        UltimateBarX.with(this)
-            .transparent()
-            .applyStatusBar()
         bind = DataBindingUtil.setContentView(this, R.layout.activity_corner)
 
         initLauncher()
@@ -64,7 +60,9 @@ class CornerActivity : AppCompatActivity() {
                 }
                 .request { allGranted: Boolean, _, _ ->
                     if (allGranted) {
-                        takePhotoLauncher.launch(mPhotoUri)
+                        mPhotoUri?.let { uri ->
+                            takePhotoLauncher.launch(uri)
+                        }
                     }
                 }
         }
@@ -97,10 +95,6 @@ class CornerActivity : AppCompatActivity() {
     }
 
 
-    /**
-     * 给 view 设置圆角
-     * @param radius 圆角大小 单位是 px
-     */
     private fun setViewCorner(view: View, radius: Float) {
 
         val provider: ViewOutlineProvider = object : ViewOutlineProvider() {

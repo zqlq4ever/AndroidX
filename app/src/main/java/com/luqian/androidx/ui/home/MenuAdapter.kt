@@ -1,18 +1,24 @@
 package com.luqian.androidx.ui.home
 
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.chad.library.adapter4.BaseQuickAdapter
+import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.luqian.androidx.R
+import android.view.LayoutInflater
+import android.view.ViewGroup
 
-/**
- * @author  LUQIAN
- * @date    2021/5/8
- *
- *  首页菜单
- */
-class MenuAdapter : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_menu) {
+class MenuAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
 
-    override fun convert(holder: BaseViewHolder, item: String) {
-        holder.setText(R.id.tv_menu, item)
+    override fun onCreateViewHolder(
+        context: android.content.Context,
+        parent: ViewGroup,
+        viewType: Int
+    ): QuickViewHolder {
+        return QuickViewHolder(LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false))
+    }
+
+    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: String?) {
+        item?.let {
+            holder.itemView.findViewById<android.widget.TextView>(R.id.tv_menu).text = it
+        }
     }
 }

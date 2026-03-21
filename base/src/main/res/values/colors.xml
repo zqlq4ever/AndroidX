@@ -6,7 +6,6 @@
     <color name="grey9">#d4d2d2</color>
     <color name="colorTransparent_15">#33000000</color>
 
-
     <!-- 公共颜色 -->
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
@@ -83,4 +82,5 @@
     <color name="white_alpha_10">#1AFFFFFF</color><!-- 10% -->
     <color name="white_alpha_05">#0DFFFFFF</color><!-- 5% -->
     <color name="white_alpha_00">#00000000</color><!-- 0% -->
+
 </resources>

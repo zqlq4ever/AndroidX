@@ -129,7 +129,7 @@ public class WifiActivity extends BaseVmActivity<WifiViewModel, ActivityWifiBind
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onWifiEvent(WifiScanResultEvent event) {
         mScanList = WifiUtil.getInstance(this).getWifiScanList();
-        mAdapter.setList(mScanList);
+        mAdapter.setItems(mScanList);
     }
 
 }

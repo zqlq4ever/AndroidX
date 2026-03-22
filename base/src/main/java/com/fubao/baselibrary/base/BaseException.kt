@@ -1,62 +1,57 @@
-package com.fubao.baselibrary.base;
+package com.fubao.baselibrary.base
 
-import java.io.IOException;
+import java.io.IOException
 
-public class BaseException extends IOException {
+class BaseException : IOException {
 
-    /**
-     * 解析数据失败
-     */
-    public static final int PARSE_ERROR = 1001;
-    public static final String PARSE_ERROR_MSG = "解析数据失败";
+    companion object {
+        /**
+         * 解析数据失败
+         */
+        const val PARSE_ERROR = 1001
+        const val PARSE_ERROR_MSG = "解析数据失败"
 
-    /**
-     * 网络问题
-     */
-    public static final int BAD_NETWORK = 1002;
-    public static final String BAD_NETWORK_MSG = "网络问题";
-    /**
-     * 连接错误
-     */
-    public static final int CONNECT_ERROR = 1003;
-    public static final String CONNECT_ERROR_MSG = "连接错误";
-    /**
-     * 连接超时
-     */
-    public static final int CONNECT_TIMEOUT = 1004;
-    public static final String CONNECT_TIMEOUT_MSG = "连接超时";
-    /**
-     * 未知错误
-     */
-    public static final int OTHER = 1005;
-    public static final String OTHER_MSG = "未知错误";
+        /**
+         * 网络问题
+         */
+        const val BAD_NETWORK = 1002
+        const val BAD_NETWORK_MSG = "网络问题"
 
+        /**
+         * 连接错误
+         */
+        const val CONNECT_ERROR = 1003
+        const val CONNECT_ERROR_MSG = "连接错误"
 
-    private String errorMsg;
-    private int errorCode;
+        /**
+         * 连接超时
+         */
+        const val CONNECT_TIMEOUT = 1004
+        const val CONNECT_TIMEOUT_MSG = "连接超时"
 
-
-    public String getErrorMsg() {
-        return errorMsg;
+        /**
+         * 未知错误
+         */
+        const val OTHER = 1005
+        const val OTHER_MSG = "未知错误"
     }
 
-    public int getErrorCode() {
-        return errorCode;
+    var errorMsg: String? = null
+        private set
+    var errorCode: Int = 0
+        private set
+
+    constructor(errorMsg: String?, cause: Throwable?) : super(errorMsg, cause) {
+        this.errorMsg = errorMsg
     }
 
-    public BaseException(String errorMsg, Throwable cause) {
-        super(errorMsg, cause);
-        this.errorMsg = errorMsg;
+    constructor(message: String?, cause: Throwable?, errorCode: Int) : super(message, cause) {
+        this.errorCode = errorCode
+        this.errorMsg = message
     }
 
-    public BaseException(String message, Throwable cause, int errorCode) {
-        super(message, cause);
-        this.errorCode = errorCode;
-        this.errorMsg = message;
-    }
-
-    public BaseException(String message, int errorCode) {
-        this.errorCode = errorCode;
-        this.errorMsg = message;
+    constructor(message: String?, errorCode: Int) : super(message) {
+        this.errorCode = errorCode
+        this.errorMsg = message
     }
 }

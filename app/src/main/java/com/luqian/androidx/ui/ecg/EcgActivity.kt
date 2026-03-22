@@ -23,7 +23,7 @@ class EcgActivity : AppCompatActivity() {
         ecgView = findViewById(R.id.ecg_data_ecgView)
         allDataView = findViewById(R.id.allData_ecgView)
 
-        data_source = StringToAscii.test(dataSource)
+        data_source = StringToAscii.test(dataSource!!)
         ecgView?.setData(data_source)
         allDataView?.setData(data_source)
     }

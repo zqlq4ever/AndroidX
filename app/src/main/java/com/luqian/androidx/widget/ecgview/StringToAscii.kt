@@ -1,72 +1,54 @@
-package com.luqian.androidx.widget.ecgview;
+package com.luqian.androidx.widget.ecgview
 
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList
+import java.util.regex.Pattern
 
+object StringToAscii {
 
-public class StringToAscii {
-    private static String toHexUtil(int n) {
-        String rt = "";
-        switch (n) {
-            case 10:
-                rt += "A";
-                break;
-            case 11:
-                rt += "B";
-                break;
-            case 12:
-                rt += "C";
-                break;
-            case 13:
-                rt += "D";
-                break;
-            case 14:
-                rt += "E";
-                break;
-            case 15:
-                rt += "F";
-                break;
-            default:
-                rt += n;
+    private fun toHexUtil(n: Int): String {
+        return when (n) {
+            10 -> "A"
+            11 -> "B"
+            12 -> "C"
+            13 -> "D"
+            14 -> "E"
+            15 -> "F"
+            else -> n.toString()
         }
-        return rt;
     }
 
-    public static String toHex(int n) {
-        StringBuilder sb = new StringBuilder();
+    @JvmStatic
+    fun toHex(n: Int): String {
+        val sb = StringBuilder()
         if (n / 16 == 0) {
-            return toHexUtil(n);
+            return toHexUtil(n)
         } else {
-            String t = toHex(n / 16);
-            int nn = n % 16;
-            sb.append(t).append(toHexUtil(nn));
+            val t = toHex(n / 16)
+            val nn = n % 16
+            sb.append(t).append(toHexUtil(nn))
         }
-        return sb.toString();
+        return sb.toString()
     }
 
-    public static String parseAscii(String str) {
-        StringBuilder sb = new StringBuilder();
-        byte[] bs = str.getBytes();
-        for (byte b : bs) {
-            sb.append(toHex(b));
+    @JvmStatic
+    fun parseAscii(str: String): String {
+        val sb = StringBuilder()
+        val bs = str.toByteArray()
+        for (b in bs) {
+            sb.append(toHex(b.toInt()))
         }
-        return sb.toString();
+        return sb.toString()
     }
 
-    public static ArrayList<String> test(String args) {
-        ArrayList<String> data = new ArrayList<>();
-        //  这个 3 是指连续数字的最少个数
-        Pattern p = Pattern.compile("\\d{3,}");
-        Matcher m = p.matcher(args);
-        int i = 0;
+    @JvmStatic
+    fun test(args: String): ArrayList<String> {
+        val data = ArrayList<String>()
+        // 这个 3 是指连续数字的最少个数
+        val p = Pattern.compile("\\d{3,}")
+        val m = p.matcher(args)
         while (m.find()) {
-//            Log.v("json","****  -- > " + m.group());
-            data.add(m.group());
-            i++;
+            data.add(m.group())
         }
-//        Log.v("json","****" + i + "  " + data_arr.toString());
-        return data;
+        return data
     }
-
 }

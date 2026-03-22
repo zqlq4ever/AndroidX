@@ -38,9 +38,9 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        bind?.run {
+        bind.run {
             cameraPreview.post { setupCamera() }
-            ivTakePhoto.setOnClickListener { _ -> viewmodel?.showPhoto(mImageCapture) }
+            ivTakePhoto.setOnClickListener { _ -> viewmodel.showPhoto(mImageCapture) }
         }
     }
 
@@ -51,15 +51,17 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
 
     override fun initLiveData() {
         super.initLiveData()
-        viewmodel?.run {
+        viewmodel.run {
             result.observe(this@CameraActivity, { })
             takePhoto.observe(this@CameraActivity, Observer {
                 FileUtils.delete(mPhotoFile)
                 mPhotoFile = File(it.path!!)
-                Glide.with(currentActivity)
-                    .load(mPhotoFile)
-                    .transform(CircleCrop())
-                    .into(bind!!.ivPreview)
+                currentActivity?.let { activity ->
+                    Glide.with(activity)
+                        .load(mPhotoFile)
+                        .transform(CircleCrop())
+                        .into(bind.ivPreview)
+                }
             })
         }
     }
@@ -82,7 +84,7 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
                         throw IllegalStateException("Back and front camera are unavailable")
                     }
                 }
-                bind?.run {
+                bind.run {
                     cameraPreview.setOnTouchListener { _, event: MotionEvent ->
                         val action = FocusMeteringAction.Builder(
                             cameraPreview.meteringPointFactory
@@ -142,7 +144,7 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
             preview,
             mImageCapture
         )
-        preview.setSurfaceProvider(bind!!.cameraPreview.surfaceProvider)
+        preview.setSurfaceProvider(bind.cameraPreview.surfaceProvider)
     }
 
     companion object {

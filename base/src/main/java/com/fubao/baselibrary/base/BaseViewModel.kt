@@ -1,45 +1,39 @@
-package com.fubao.baselibrary.base;
+package com.fubao.baselibrary.base
 
-
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @author LUQIAN
  * @date 2021/5/10
  */
-public class BaseViewModel extends ViewModel {
+open class BaseViewModel : ViewModel() {
 
-    private CompositeDisposable compositeDisposable;
+    private var compositeDisposable: CompositeDisposable? = null
 
-    public MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    val isLoading = MutableLiveData<Boolean>()
 
-    public void addDisposable(Observable<?> flowable, BaseVmObserver observer) {
+    fun <T> addDisposable(flowable: Observable<T>, observer: BaseVmObserver<T>) {
         if (compositeDisposable == null) {
-            compositeDisposable = new CompositeDisposable();
+            compositeDisposable = CompositeDisposable()
         }
-        compositeDisposable.add(
-                flowable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(observer));
+        compositeDisposable?.add(
+            flowable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(observer)
+        )
     }
 
-
-    public void removeDisposable() {
-        if (compositeDisposable != null) {
-            compositeDisposable.dispose();
-        }
+    fun removeDisposable() {
+        compositeDisposable?.dispose()
     }
 
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        removeDisposable();
+    override fun onCleared() {
+        super.onCleared()
+        removeDisposable()
     }
-
 }

@@ -1,29 +1,29 @@
-package com.fubao.baselibrary.utils;
+package com.fubao.baselibrary.utils
 
-import android.app.Activity;
-import android.content.pm.ActivityInfo;
-import android.util.DisplayMetrics;
+import android.app.Activity
+import android.content.pm.ActivityInfo
+import android.util.DisplayMetrics
 
-public class ScreenUtils {
+object ScreenUtils {
     /**
      * 获取屏幕真实宽度
      */
-    public static int getScreenWidth(Activity activity) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-        return displayMetrics.widthPixels;
+    @JvmStatic
+    fun getScreenWidth(activity: Activity): Int {
+        val displayMetrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+        return displayMetrics.widthPixels
     }
-
 
     /**
      * 获取屏幕真实高度，包括状态栏和标题栏高度。
      */
-    public static int getScreenHeight(Activity activity) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-        return displayMetrics.heightPixels;
+    @JvmStatic
+    fun getScreenHeight(activity: Activity): Int {
+        val displayMetrics = DisplayMetrics()
+        activity.windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+        return displayMetrics.heightPixels
     }
-
 
     /**
      * 简单的用屏幕所谓的宽高(宽高只是相对的)模拟屏幕的方向。<br/>
@@ -31,12 +31,12 @@ public class ScreenUtils {
      * 宽<高：竖屏。<br/>
      * 有正方形的屏吗？
      */
-    public static int getScreenOrientation(Activity activity) {
-        if (getScreenWidth(activity) > getScreenHeight(activity)) {
-            return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-        } else if (getScreenWidth(activity) < getScreenHeight(activity)) {
-            return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    @JvmStatic
+    fun getScreenOrientation(activity: Activity): Int {
+        return when {
+            getScreenWidth(activity) > getScreenHeight(activity) -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            getScreenWidth(activity) < getScreenHeight(activity) -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            else -> ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         }
-        return ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
     }
 }

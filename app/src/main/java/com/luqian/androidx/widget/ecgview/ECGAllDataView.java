@@ -14,22 +14,34 @@ import java.util.ArrayList;
 
 public class ECGAllDataView extends View {
 
-    private int width, height;//  本页面宽，高
-    private ArrayList<String> data_source;
-    private int data_num;//  总的数据个数
-    private float rect_gap_x;//  下方矩形区域心电图数据间的横坐标间隙
-    private float rectY_center;//  下方矩形区域心电图的中心Y值
+    private int width, height;
+    private ArrayList<Integer> dataSource;
+    private int dataNum;
+    private float rectGapX;
+    private float rectYCenter;
+
+    private Paint paint;
+    private Path path;
 
     public ECGAllDataView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //  背景色 透明
-        this.setBackgroundColor(getResources().getColor(R.color.transparent));
+        init();
     }
 
     public ECGAllDataView(Context context) {
         super(context);
-        //  背景色 透明
-        this.setBackgroundColor(getResources().getColor(R.color.transparent));
+        init();
+    }
+
+    private void init() {
+        setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(getResources().getColor(R.color.red1));
+        paint.setStrokeWidth(1.0f);
+
+        path = new Path();
     }
 
     @Override
@@ -37,10 +49,9 @@ public class ECGAllDataView extends View {
         if (changed) {
             width = getWidth();
             height = getHeight();
-            data_num = data_source.size();
-            rect_gap_x = (float) width / data_num;
-            rectY_center = (float) height / 2;
-//            Log.v("json","两点间横坐标间距:" + gap_x + "矩形区域两点间横坐标间距：" + rect_gap_x);
+            dataNum = dataSource != null ? dataSource.size() : 0;
+            rectGapX = (float) width / dataNum;
+            rectYCenter = (float) height / 2;
         }
         super.onLayout(changed, left, top, right, bottom);
     }
@@ -48,44 +59,47 @@ public class ECGAllDataView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        DrawAllData(canvas);
+        drawAllData(canvas);
     }
 
-    /**
-     * 画下方矩形区域的心电图
-     */
-    private void DrawAllData(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(getResources().getColor(R.color.red1));
-        paint.setStrokeWidth(1.0f);
-        Path path = new Path();
+    private void drawAllData(Canvas canvas) {
+        if (dataSource == null || dataSource.isEmpty()) {
+            return;
+        }
 
-        path.moveTo(0, getRectY_coordinate(data_source.get(0)));
+        path.reset();
+        path.moveTo(0, getRectYCoordinate(dataSource.get(0)));
 
-        for (int i = 1; i < this.data_source.size(); i++) {
-            path.lineTo(rect_gap_x * i, getRectY_coordinate(data_source.get(i)));
+        for (int i = 1; i < dataSource.size(); i++) {
+            path.lineTo(rectGapX * i, getRectYCoordinate(dataSource.get(i)));
         }
         canvas.drawPath(path, paint);
     }
 
-    /**
-     * 将数值转换为y坐标，下方矩形 显示心电图的区域
-     */
-    private float getRectY_coordinate(String data) {
-        int y_int = Integer.parseInt(data);
-        y_int = (y_int - 2048) * (-1);
-        float y_coor = 0.0f;
-
-        y_coor = y_int / 8 + rectY_center;
-//        Log.v("json","<rectY_center> " + rectY_center + " < y_coor >" + y_coor +"  height:" + height +" rect_hight " + rect_high);
-        return y_coor;
+    private float getRectYCoordinate(int data) {
+        int yInt = (data - 2048) * (-1);
+        return yInt / 8 + rectYCenter;
     }
 
-    /**
-     * 暴露接口，设置数据源
-     */
     public void setData(ArrayList<String> data) {
-        this.data_source = data;
+        if (data == null) {
+            this.dataSource = null;
+        } else {
+            this.dataSource = new ArrayList<>(data.size());
+            for (String s : data) {
+                try {
+                    this.dataSource.add(Integer.parseInt(s));
+                } catch (NumberFormatException e) {
+                    this.dataSource.add(2048);
+                }
+            }
+        }
+        invalidate();
     }
+
+    public void setIntegerData(ArrayList<Integer> data) {
+        this.dataSource = data != null ? new ArrayList<>(data) : null;
+        invalidate();
+    }
+
 }

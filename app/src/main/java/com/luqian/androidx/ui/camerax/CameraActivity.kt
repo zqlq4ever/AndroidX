@@ -144,7 +144,7 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
             preview,
             mImageCapture
         )
-        preview.setSurfaceProvider(bind.cameraPreview.surfaceProvider)
+        preview.surfaceProvider = bind.cameraPreview.surfaceProvider
     }
 
     companion object {

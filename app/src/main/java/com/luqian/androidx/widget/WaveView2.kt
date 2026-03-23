@@ -171,5 +171,5 @@ class WaveView2 @JvmOverloads constructor(
         canvas.restore()
     }
 
-    inner class Circle(var width: Int, var alpha: Int)
+    class Circle(var width: Int, var alpha: Int)
 }

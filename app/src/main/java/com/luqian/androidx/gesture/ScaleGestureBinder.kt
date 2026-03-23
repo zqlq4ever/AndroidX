@@ -8,7 +8,4 @@ class ScaleGestureBinder internal constructor(
     context: Context,
     scaleGestureListener: ScaleGestureListener
 ) : ScaleGestureDetector(context, scaleGestureListener) {
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        return super.onTouchEvent(event)
-    }
 }

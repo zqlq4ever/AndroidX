@@ -19,7 +19,7 @@ import kotlinx.coroutines.withContext
 
 class ScaleViewActivity : AppCompatActivity() {
 
-    lateinit var bind: ActivityScaleBinding;
+    lateinit var bind: ActivityScaleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

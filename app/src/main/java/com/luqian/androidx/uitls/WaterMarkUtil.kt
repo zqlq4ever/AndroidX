@@ -110,7 +110,7 @@ class WaterMarkUtil private constructor() {
         activity.bind.root.addView(layout)
     }
 
-    inner class WatermarkDrawable : Drawable() {
+    class WatermarkDrawable : Drawable() {
 
         private val mPaint: Paint = Paint()
 

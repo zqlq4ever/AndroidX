@@ -15,6 +15,7 @@ import com.luqian.androidx.ui.other.ScaleViewActivity
 import com.luqian.androidx.ui.wifi.WifiActivity
 import com.permissionx.guolindev.PermissionX
 import com.permissionx.guolindev.request.ForwardScope
+import com.zqlq.common.R as BaseR
 
 class HomeActivity : AppCompatActivity() {
 
@@ -31,36 +32,34 @@ class HomeActivity : AppCompatActivity() {
                 2 -> ActivityHelper.startActivity(WifiActivity::class.java)
                 3 -> {
                     PermissionX.init(this@HomeActivity)
-                        .permissions(
-                            Manifest.permission.CAMERA,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        )
+                        .permissions(Manifest.permission.CAMERA)
                         .onForwardToSettings { scope: ForwardScope, deniedList: List<String> ->
                             scope.showForwardToSettingsDialog(
                                 deniedList,
-                                "请在设置中开启授权",
-                                "去设置权限"
+                                getString(BaseR.string.permission_camera),
+                                getString(BaseR.string.btn_setting)
                             )
                         }
                         .request { allGranted: Boolean, _, _ ->
                             if (allGranted) {
                                 ActivityHelper.startActivity(CameraActivity::class.java)
                             } else {
-                                ToastUtils.showShort("请先授权")
+                                ToastUtils.showShort(getString(BaseR.string.permission_camera_photo))
                             }
                         }
                 }
+
                 4 -> ActivityHelper.startActivity(EcgActivity::class.java)
             }
         }
         bind.rvMenu.adapter = menuAdapter
         menuAdapter.submitList(
             arrayListOf(
-                "view 手势旋转缩放 ",
-                "view 圆角",
-                "wifi",
-                "CameraX",
-                "心电图",
+                MenuItem(getString(BaseR.string.menu_gesture), R.drawable.ic_menu_gesture),
+                MenuItem(getString(BaseR.string.menu_corner), R.drawable.ic_menu_corner),
+                MenuItem(getString(BaseR.string.menu_wifi), R.drawable.ic_menu_wifi),
+                MenuItem(getString(BaseR.string.menu_camera), R.drawable.ic_menu_camera),
+                MenuItem(getString(BaseR.string.menu_ecg), R.drawable.ic_menu_ecg)
             )
         )
     }

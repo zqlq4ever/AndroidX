@@ -5,7 +5,11 @@ import android.content.IntentFilter
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import com.fubao.baselibrary.base.BaseVmActivity
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
+import com.zqlq.common.base.BaseVmActivity
 import com.luqian.androidx.R
 import com.luqian.androidx.databinding.ActivityWifiBinding
 import com.luqian.androidx.model.eventbus.WifiScanResultEvent
@@ -16,39 +20,78 @@ import com.lxj.xpopup.enums.PopupAnimation
 import com.permissionx.guolindev.PermissionX
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import com.zqlq.common.R as BaseR
 
 /**
- * 仅仅作为 WIFI 测试用，随时可能废弃
+ * WiFi 扫描页面 - 采用深色主题设计，参考 CameraActivity 风格
  */
 class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
+
+    override val enableEventBus = true
 
     private var mReceiver: WifiBroadCastReceiver? = null
     private var mAdapter: WifiAdapter? = null
     private var mInputWifiPsdPop: InputWifiPsdPop? = null
     private var mScanList: List<ScanResult>? = null
     private var mScanResultSelected: ScanResult? = null
+    private var mRefreshRotateAnim: RotateAnimation? = null
 
     override fun getLayoutId(): Int = R.layout.activity_wifi
 
     override fun initView(savedInstanceState: Bundle?) {
-        bind.tvRefreshWifi.setOnClickListener { WifiUtil.getInstance(this).scanWifi() }
+        setupRefreshAnimation()
+        setupClickListeners()
         registerWifi()
+        setupAdapter()
+    }
+
+    private fun setupRefreshAnimation() {
+        mRefreshRotateAnim = RotateAnimation(
+            0f, 360f,
+            Animation.RELATIVE_TO_SELF, 0.5f,
+            Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = 1000
+            interpolator = LinearInterpolator()
+            repeatCount = Animation.INFINITE
+        }
+    }
+
+    private fun setupClickListeners() {
+        bind.ivRefresh.setOnClickListener {
+            startRefreshAnimation()
+            WifiUtil.getInstance(this).scanWifi()
+        }
+    }
+
+    private fun startRefreshAnimation() {
+        bind.ivRefresh.startAnimation(mRefreshRotateAnim)
+    }
+
+    private fun stopRefreshAnimation() {
+        bind.ivRefresh.clearAnimation()
+    }
+
+    private fun setupAdapter() {
         mAdapter = WifiAdapter().apply {
             setOnItemClickListener { _, _, position ->
-                showInputWifiPsdPop()
-                mScanResultSelected = mScanList?.get(position)
+                mScanList?.get(position)?.let { scanResult ->
+                    mScanResultSelected = scanResult
+                    showInputWifiPsdPop()
+                }
             }
         }
         bind.rvWifi.adapter = mAdapter
     }
 
     override fun initData() {
-        requestPer()
+        requestPermission()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mReceiver?.let { unregisterReceiver(it) }
+        stopRefreshAnimation()
     }
 
     private fun showInputWifiPsdPop() {
@@ -65,10 +108,10 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
     }
 
     /**
-     * 连接 WIFI
+     * 连接 WiFi
      */
     fun connect(psd: String) {
-        toast("开发中")
+        toast(getString(BaseR.string.tip_developing))
     }
 
     fun dismiss() {
@@ -87,32 +130,45 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
         registerReceiver(mReceiver, filter)
     }
 
-    private fun requestPer() {
+    private fun requestPermission() {
         PermissionX.init(this)
             .permissions(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION
             )
             .onForwardToSettings { scope, deniedList ->
                 scope.showForwardToSettingsDialog(
                     deniedList,
-                    "请在设置中开启授权",
-                    "去设置权限"
+                    getString(BaseR.string.permission_location_wifi),
+                    getString(BaseR.string.btn_setting)
                 )
             }
             .request { allGranted, _, _ ->
                 if (allGranted) {
+                    startRefreshAnimation()
                     WifiUtil.getInstance(this).scanWifi()
                 } else {
-                    toast("请先授权")
+                    toast(getString(BaseR.string.permission_camera_photo))
+                    updateEmptyState(true)
                 }
             }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onWifiEvent(event: WifiScanResultEvent) {
+        stopRefreshAnimation()
         mScanList = WifiUtil.getInstance(this).getWifiScanList()
-        mAdapter?.submitList(mScanList)
+
+        val isEmpty = mScanList.isNullOrEmpty()
+        updateEmptyState(isEmpty)
+
+        if (!isEmpty) {
+            mAdapter?.submitList(mScanList)
+        }
+    }
+
+    private fun updateEmptyState(isEmpty: Boolean) {
+        bind.llEmpty.visibility = if (isEmpty) View.VISIBLE else View.GONE
+        bind.rvWifi.visibility = if (isEmpty) View.GONE else View.VISIBLE
     }
 }

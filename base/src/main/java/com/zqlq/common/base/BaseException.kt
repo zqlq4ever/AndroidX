@@ -1,4 +1,4 @@
-package com.fubao.baselibrary.base
+package com.zqlq.common.base
 
 import java.io.IOException
 

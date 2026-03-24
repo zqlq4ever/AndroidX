@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    android:layout_width = "match_parent"
-    android:layout_height = "wrap_content"
-    android:background = "@color/white">
-    
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dp_280"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_pop_wifi"
+    android:padding="@dimen/dp_16">
+
     <TextView
-        android:id = "@+id/tv_title"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:gravity = "center"
-        android:padding = "@dimen/dp_8"
-        android:text = "输入 WiFi 密码"
-        app:layout_constraintStart_toStartOf = "parent"
-        app:layout_constraintTop_toTopOf = "parent" />
-    
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/dp_8"
+        android:text="@string/wifi_input_password"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
-        android:id = "@+id/et_wifi_psd"
-        android:layout_width = "0dp"
-        android:layout_height = "wrap_content"
-        android:layout_margin = "@dimen/dp_8"
-        app:layout_constraintEnd_toEndOf = "parent"
-        app:layout_constraintStart_toStartOf = "parent"
-        app:layout_constraintTop_toBottomOf = "@id/tv_title" />
-    
-    <TextView
-        android:id = "@+id/tv_connect"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:gravity = "center"
-        android:padding = "@dimen/dp_10"
-        android:text = "连接"
-        app:layout_constraintStart_toStartOf = "parent"
-        app:layout_constraintTop_toBottomOf = "@id/et_wifi_psd" />
+        android:id="@+id/et_wifi_psd"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_16"
+        android:background="@drawable/bg_et_wifi_psd"
+        android:hint="@string/wifi_input_password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="@dimen/dp_12"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray10"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/tv_connect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:layout_marginTop="@dimen/dp_16"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/btn_connect"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_15"
+        app:background_normal="@color/blue1"
+        app:corner_radius="@dimen/dp_8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_wifi_psd"
+        app:ripple="true"
+        app:ripple_color="@color/blue2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

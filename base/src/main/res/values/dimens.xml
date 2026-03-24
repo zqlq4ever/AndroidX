@@ -2,7 +2,10 @@
 <resources>
     <!-- 字体 -->
     <dimen name = "sp_10">10sp</dimen>
+    <dimen name = "sp_12">12sp</dimen>
+    <dimen name = "sp_14">14sp</dimen>
     <dimen name = "sp_15">15sp</dimen>
+    <dimen name = "sp_16">16sp</dimen>
     <dimen name = "sp_19">19sp</dimen>
     <dimen name = "sp_23">23sp</dimen>
     <dimen name = "sp_24">24sp</dimen>
@@ -31,6 +34,7 @@
     <dimen name = "dp_19">19dp</dimen>
     <dimen name = "dp_20">20dp</dimen>
     <dimen name = "dp_23">23dp</dimen>
+    <dimen name = "dp_24">24dp</dimen>
     <dimen name = "dp_26">26dp</dimen>
     <dimen name = "dp_28">28dp</dimen>
     <dimen name = "dp_30">30dp</dimen>
@@ -72,5 +76,6 @@
     <dimen name = "dp_243">243dp</dimen>
     <dimen name = "dp_250">250dp</dimen>
     <dimen name = "dp_278">278dp</dimen>
+    <dimen name = "dp_280">280dp</dimen>
     <dimen name = "dp_300">300dp</dimen>
 </resources>

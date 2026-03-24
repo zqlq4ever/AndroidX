@@ -10,15 +10,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F8F9FA"
         tools:context=".ui.home.HomeActivity">
+
+        <View
+            android:id="@+id/view_title_bg"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/gradient_title_bg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/home_title"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_subtitle"
+            android:textColor="#CCFFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/home_feature_list"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_title_bg" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_menu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:paddingBottom="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_list_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

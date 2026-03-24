@@ -1,13 +1,12 @@
-package com.fubao.baselibrary.widget
+package com.zqlq.common.widget
 
 import android.app.Dialog
 import android.content.Context
 import android.view.Gravity
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import com.fubao.baselibrary.R
+import com.zqlq.common.R
 
 /**
  * 自定义弹窗

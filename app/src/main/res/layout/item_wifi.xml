@@ -1,22 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android = "http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    android:layout_width = "match_parent"
-    android:layout_height = "wrap_content">
-    
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bg_wifi_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="@drawable/ripple_wifi_item"
+    android:padding="16dp">
+
+    <!-- WiFi 图标 -->
+    <ImageView
+        android:id="@+id/iv_wifi_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_wifi_icon"
+        android:padding="8dp"
+        android:src="@drawable/ic_wifi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
+
+    <!-- WiFi 名称 -->
     <TextView
-        android:id = "@+id/tv_wifi_name"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content"
-        android:layout_margin = "@dimen/dp_10"
-        android:gravity = "center_vertical"
-        android:padding = "@dimen/dp_8"
-        android:text = "wifi"
-        android:textColor = "@color/black"
-        android:textSize = "@dimen/sp_15"
-        app:layout_constraintBottom_toBottomOf = "parent"
-        app:layout_constraintStart_toStartOf = "parent"
-        app:layout_constraintTop_toTopOf = "parent" />
+        android:id="@+id/tv_wifi_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/iv_signal"
+        app:layout_constraintStart_toEndOf="@id/iv_wifi_icon"
+        app:layout_constraintTop_toTopOf="@id/iv_wifi_icon"
+        tools:text="WiFi_Name_5G" />
+
+    <!-- 信号强度文字 -->
+    <TextView
+        android:id="@+id/tv_signal_strength"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/gray7"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/iv_wifi_icon"
+        app:layout_constraintEnd_toStartOf="@id/iv_signal"
+        app:layout_constraintStart_toEndOf="@id/iv_wifi_icon"
+        app:layout_constraintTop_toBottomOf="@id/tv_wifi_name"
+        tools:text="信号强 · 安全" />
+
+    <!-- 信号强度图标 -->
+    <ImageView
+        android:id="@+id/iv_signal"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="4dp"
+        android:src="@drawable/ic_signal_full"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue1"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

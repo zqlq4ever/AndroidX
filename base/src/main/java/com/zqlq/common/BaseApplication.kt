@@ -1,4 +1,4 @@
-package com.fubao.baselibrary
+package com.zqlq.common
 
 import android.app.Application
 import com.alibaba.android.arouter.launcher.ARouter

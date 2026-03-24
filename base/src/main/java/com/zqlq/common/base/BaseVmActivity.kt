@@ -1,4 +1,4 @@
-package com.fubao.baselibrary.base
+package com.zqlq.common.base
 
 import android.app.Activity
 import android.content.Intent
@@ -15,12 +15,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
-import com.fubao.baselibrary.utils.ActivityManager
-import com.fubao.baselibrary.utils.ScreenUtils
-import com.fubao.baselibrary.widget.LoadingDialog
+import com.zqlq.common.utils.ActivityManager
+import com.zqlq.common.utils.ScreenUtils
+import com.zqlq.common.widget.LoadingDialog
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
 import java.lang.reflect.ParameterizedType
 
@@ -92,13 +90,19 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
+        if (enableEventBus && !EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this)
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this)
+        if (enableEventBus && EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this)
+        }
     }
+
+    protected open val enableEventBus: Boolean = false
 
     private fun setWindowParams() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -204,7 +208,4 @@ abstract class BaseVmActivity<VM : BaseViewModel, DB : ViewDataBinding> : AppCom
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    open fun onMessageEvent(event: EmptyEvent) {
-    }
 }

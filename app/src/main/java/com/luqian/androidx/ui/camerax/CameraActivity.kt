@@ -4,18 +4,26 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.Surface
-import androidx.camera.core.*
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.Camera
+import androidx.camera.core.CameraInfoUnavailableException
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.FocusMeteringAction
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import coil3.load
+import coil3.request.transformations
+import coil3.transform.RoundedCornersTransformation
 import com.blankj.utilcode.util.FileUtils
 import com.blankj.utilcode.util.PathUtils
 import com.blankj.utilcode.util.ScreenUtils
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.fubao.baselibrary.base.BaseVmActivity
 import com.luqian.androidx.R
 import com.luqian.androidx.databinding.ActivityCameraBinding
+import com.luqian.androidx.ext.dpToPx
+import com.zqlq.common.base.BaseVmActivity
 import java.io.File
 import kotlin.math.abs
 import kotlin.math.max
@@ -33,6 +41,8 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
 
     private var mPhotoFile: File? = null
 
+    private var isFlashOn = false
+
     override fun getLayoutId(): Int {
         return R.layout.activity_camera
     }
@@ -40,7 +50,10 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
     override fun initView(savedInstanceState: Bundle?) {
         bind.run {
             cameraPreview.post { setupCamera() }
-            ivTakePhoto.setOnClickListener { _ -> viewmodel.showPhoto(mImageCapture) }
+            ivTakePhoto.setOnClickListener { viewmodel.showPhoto(mImageCapture) }
+            ivSwitchCamera.setOnClickListener { switchCamera() }
+            ivFlash.setOnClickListener { toggleFlash() }
+            ivGallery.setOnClickListener { openGallery() }
         }
     }
 
@@ -57,13 +70,41 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
                 FileUtils.delete(mPhotoFile)
                 mPhotoFile = File(it.path!!)
                 currentActivity?.let { activity ->
-                    Glide.with(activity)
-                        .load(mPhotoFile)
-                        .transform(CircleCrop())
-                        .into(bind.ivPreview)
+                    bind.ivPreview.load(mPhotoFile) {
+                        transformations(RoundedCornersTransformation(6.dpToPx()))
+                    }
                 }
             })
         }
+    }
+
+    private fun switchCamera() {
+        lensFacing = if (lensFacing == CameraSelector.LENS_FACING_BACK) {
+            CameraSelector.LENS_FACING_FRONT
+        } else {
+            CameraSelector.LENS_FACING_BACK
+        }
+        bindPreview()
+    }
+
+    private fun toggleFlash() {
+        isFlashOn = !isFlashOn
+        mCamera?.cameraControl?.enableTorch(isFlashOn)
+        bind.ivFlash.setImageResource(
+            if (isFlashOn) R.drawable.ic_torch_on else R.drawable.ic_torch_off
+        )
+    }
+
+    private fun openGallery() {
+
+    }
+
+    private fun getUriForFile(file: File): android.net.Uri {
+        return androidx.core.content.FileProvider.getUriForFile(
+            this,
+            "${packageName}.fileprovider",
+            file
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,9 +118,11 @@ class CameraActivity : BaseVmActivity<CameraViewModel, ActivityCameraBinding>() 
                     hasBackCamera() -> {
                         CameraSelector.LENS_FACING_BACK
                     }
+
                     hasFrontCamera() -> {
                         CameraSelector.LENS_FACING_FRONT
                     }
+
                     else -> {
                         throw IllegalStateException("Back and front camera are unavailable")
                     }

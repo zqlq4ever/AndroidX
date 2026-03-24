@@ -1,4 +1,4 @@
-package com.fubao.baselibrary.utils
+package com.zqlq.common.utils
 
 import android.app.Activity
 import android.content.pm.ActivityInfo

@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fubao.baselibrary"
+    namespace = "com.zqlq.common"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

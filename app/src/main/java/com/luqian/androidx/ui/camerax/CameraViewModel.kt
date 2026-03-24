@@ -5,7 +5,7 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.TimeUtils
-import com.fubao.baselibrary.base.BaseViewModel
+import com.zqlq.common.base.BaseViewModel
 import java.io.File
 import java.util.concurrent.Executors
 

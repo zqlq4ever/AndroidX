@@ -4,23 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="10dp"
-    android:elevation="3dp"
-    app:background_normal="#99ffffff"
-    app:background_pressed="#33333333"
-    app:corner_radius="@dimen/dp_10">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    android:elevation="4dp"
+    android:translationZ="2dp"
+    app:background_normal="#FFFFFF"
+    app:background_pressed="#F5F5F5"
+    app:corner_radius="16dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="功能图标"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@android:drawable/ic_menu_gallery" />
 
     <TextView
         android:id="@+id/tv_menu"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="#333333"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_icon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="我是菜单" />
+        tools:text="手势旋转缩放" />
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="箭头"
+        android:rotation="180"
+        android:src="@android:drawable/ic_media_previous"
+        android:tint="#CCCCCC"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </com.ruffian.library.widget.RConstraintLayout>

@@ -6,7 +6,7 @@ import com.luqian.androidx.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class MenuAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
+class MenuAdapter : BaseQuickAdapter<MenuItem, QuickViewHolder>() {
 
     override fun onCreateViewHolder(
         context: android.content.Context,
@@ -16,9 +16,15 @@ class MenuAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
         return QuickViewHolder(LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false))
     }
 
-    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: String?) {
+    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: MenuItem?) {
         item?.let {
-            holder.itemView.findViewById<android.widget.TextView>(R.id.tv_menu).text = it
+            holder.itemView.findViewById<android.widget.TextView>(R.id.tv_menu).text = it.title
+            holder.itemView.findViewById<android.widget.ImageView>(R.id.iv_icon).setImageResource(it.iconRes)
         }
     }
 }
+
+data class MenuItem(
+    val title: String,
+    val iconRes: Int
+)

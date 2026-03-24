@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.IntRange
 import com.blankj.utilcode.util.ConvertUtils
-import com.luqian.androidx.ui.other.ScaleViewActivity
 import kotlin.math.sqrt
+import androidx.core.graphics.withSave
 
 /**
  * 添加水印
@@ -95,19 +95,19 @@ class WaterMarkUtil private constructor() {
      * 显示水印，铺满整个页面
      */
     @JvmOverloads
-    fun show(activity: ScaleViewActivity, text: String? = mText) {
+    fun show(view: ViewGroup, text: String = mText) {
         val drawable = WatermarkDrawable()
         drawable.mText = text
         drawable.mTextColor = mTextColor
         drawable.mTextSize = mTextSize
         drawable.mRotation = mRotation
-        val layout = FrameLayout(activity)
+        val layout = FrameLayout(view.context)
         layout.layoutParams = FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         layout.background = drawable
-        activity.bind.root.addView(layout)
+        view.addView(layout)
     }
 
     class WatermarkDrawable : Drawable() {
@@ -158,8 +158,6 @@ class WaterMarkUtil private constructor() {
                 }
                 positionY += diagonal / 10
             }
-            canvas.save()
-            canvas.restore()
         }
 
         override fun setAlpha(@IntRange(from = 0, to = 255) alpha: Int) {}

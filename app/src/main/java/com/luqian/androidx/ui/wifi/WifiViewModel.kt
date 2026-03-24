@@ -1,6 +1,6 @@
 package com.luqian.androidx.ui.wifi
 
-import com.fubao.baselibrary.base.BaseViewModel
+import com.zqlq.common.base.BaseViewModel
 
 /**
  * @author LUQIAN

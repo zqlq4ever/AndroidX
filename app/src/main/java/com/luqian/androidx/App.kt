@@ -1,7 +1,7 @@
 package com.luqian.androidx
 
 import android.content.Context
-import com.fubao.baselibrary.BaseApplication
+import com.zqlq.common.BaseApplication
 import com.luqian.androidx.core.ActivityHelper
 
 /**

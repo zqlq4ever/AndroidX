@@ -62,7 +62,7 @@ public class ScrollECGView extends View {
 
         gridPaint = new Paint();
         gridPaint.setStyle(Paint.Style.STROKE);
-        gridPaint.setColor(getResources().getColor(R.color.teal_200));
+        gridPaint.setColor(getResources().getColor(R.color.cyan_200));
         gridPaint.setStrokeWidth(1.0f);
 
         ecgPaint = new Paint();
@@ -72,7 +72,7 @@ public class ScrollECGView extends View {
 
         rectPaint = new Paint();
         rectPaint.setStyle(Paint.Style.FILL);
-        rectPaint.setColor(getResources().getColor(R.color.teal_700));
+        rectPaint.setColor(getResources().getColor(R.color.cyan_700));
         rectPaint.setStrokeWidth(1.0f);
 
         gridPath = new Path();

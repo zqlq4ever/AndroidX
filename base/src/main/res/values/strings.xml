@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 通用按钮文本 -->
+    <string name="btn_confirm">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_setting">去设置</string>
+    <string name="btn_connect">连接</string>
+    <string name="btn_refresh">刷新</string>
+
+    <!-- 通用提示文本 -->
+    <string name="tip_loading">加载中…</string>
+    <string name="tip_developing">开发中</string>
+    <string name="tip_empty">暂无数据</string>
+    <string name="tip_error">出错了，请重试</string>
+
+    <!-- 权限相关 -->
+    <string name="permission_title">权限申请</string>
+    <string name="permission_location_wifi">请在设置中开启定位权限以扫描 WiFi</string>
+    <string name="permission_camera">需要相机权限</string>
+    <string name="permission_camera_photo">需要相机权限才能拍照</string>
+    <string name="permission_denied">权限被拒绝</string>
+
+    <!-- WiFi 相关 -->
+    <string name="wifi_title">WiFi 扫描</string>
+    <string name="wifi_empty">暂无 WiFi 信号</string>
+    <string name="wifi_hidden_network">隐藏网络</string>
+    <string name="wifi_input_password">输入 WiFi 密码</string>
+    <string name="wifi_signal_excellent">信号极强</string>
+    <string name="wifi_signal_good">信号强</string>
+    <string name="wifi_signal_fair">信号一般</string>
+    <string name="wifi_signal_weak">信号弱</string>
+    <string name="wifi_signal_poor">信号极弱</string>
+    <string name="wifi_security_open">开放</string>
+    <string name="wifi_separator">·</string>
+
+    <!-- 相机相关 -->
+    <string name="camera_title">拍照</string>
+    <string name="camera_take_photo">点击拍照</string>
+    <string name="camera_photo_name">photo.jpg</string>
+
+    <!-- 主页菜单 -->
+    <string name="menu_gesture">手势旋转缩放</string>
+    <string name="menu_corner">圆角处理</string>
+    <string name="menu_wifi">WiFi 连接</string>
+    <string name="menu_camera">CameraX 相机</string>
+    <string name="menu_ecg">心电图</string>
+
+    <!-- 主页标题 -->
+    <string name="home_title">功能演示</string>
+    <string name="home_subtitle">AndroidX 组件示例</string>
+    <string name="home_feature_list">功能列表</string>
+
+    <!-- 圆角图片 -->
+    <string name="corner_title">圆角图片</string>
+
+</resources>

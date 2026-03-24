@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_200">#FF90CAF9</color>
     <color name="blue_500">#FF2196F3</color>
     <color name="blue_700">#FF1976D2</color>
     <color name="cyan_200">#FF80DEEA</color>
@@ -8,7 +7,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
-    <color name="red1">#FFFF0000</color>
-    <color name="gradient_start">#FF1A237E</color>
-    <color name="gradient_end">#FF0D47A1</color>
+    <color name="ecg_green">#FF00E676</color>
+    <color name="ecg_green_glow">#8000E676</color>
+    <color name="grid_major">#33FFFFFF</color>
+    <color name="grid_minor">#1AFFFFFF</color>
+    <color name="ecg_background">#FF0A1929</color>
 </resources>

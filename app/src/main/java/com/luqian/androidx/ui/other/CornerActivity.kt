@@ -41,7 +41,7 @@ class CornerActivity : AppCompatActivity() {
         initLauncher()
 
         binding.ivPhoto.load(URL) {
-            transformations(RoundedCornersTransformation(28.dpToPx()))
+            transformations(RoundedCornersTransformation(26.dpToPx()))
         }
 
         val clickListener = View.OnClickListener {

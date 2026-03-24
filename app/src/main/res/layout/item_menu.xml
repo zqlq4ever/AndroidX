@@ -4,54 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="12dp"
+    android:layout_marginBottom="14dp"
     android:elevation="4dp"
     android:translationZ="2dp"
-    app:background_normal="#FFFFFF"
-    app:background_pressed="#F5F5F5"
-    app:corner_radius="16dp">
+    app:background_normal="#FFFFFFFF"
+    app:background_pressed="#FFF8F8F8"
+    app:corner_radius="20dp">
 
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:contentDescription="功能图标"
-        android:padding="8dp"
-        android:scaleType="centerInside"
+    <View
+        android:id="@+id/view_accent"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="#F48FB1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@android:drawable/ic_menu_gallery" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_icon"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="#FFF3E0"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view_accent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="功能图标"
+            android:padding="12dp"
+            android:scaleType="centerInside"
+            android:tint="#FF8A65"
+            tools:src="@android:drawable/ic_menu_gallery" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tv_menu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="#333333"
-        android:textSize="16sp"
+        android:textColor="#5D4037"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/iv_icon"
+        app:layout_constraintEnd_toStartOf="@id/iv_arrow"
+        app:layout_constraintStart_toEndOf="@id/card_icon"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="手势旋转缩放" />
 
     <ImageView
         android:id="@+id/iv_arrow"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_arrow_circle"
         android:contentDescription="箭头"
-        android:rotation="180"
-        android:src="@android:drawable/ic_media_previous"
-        android:tint="#CCCCCC"
+        android:padding="6dp"
+        android:src="@android:drawable/ic_media_next"
+        android:tint="#BCAAA4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

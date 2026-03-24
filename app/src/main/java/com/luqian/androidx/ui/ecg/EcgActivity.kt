@@ -3,14 +3,14 @@ package com.luqian.androidx.ui.ecg
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.luqian.androidx.R
-import com.luqian.androidx.widget.ecgview.ECGAllDataView
-import com.luqian.androidx.widget.ecgview.ScrollECGView
+import com.luqian.androidx.widget.ecgview.EcgAllDataView
+import com.luqian.androidx.widget.ecgview.ScrollEcgView
 import com.luqian.androidx.widget.ecgview.StringToAscii
 
 class EcgActivity : AppCompatActivity() {
 
-    private var ecgView: ScrollECGView? = null
-    private var allDataView: ECGAllDataView? = null
+    private var ecgView: ScrollEcgView? = null
+    private var allDataView: EcgAllDataView? = null
     private var data_source: ArrayList<String>? = null
     private var dataSource: String? = null
 
@@ -77,6 +77,11 @@ class EcgActivity : AppCompatActivity() {
         data_source?.let {
             ecgView?.setData(it)
             allDataView?.setData(it)
+        }
+
+        ecgView?.setOnScrollChangeListener { scrollX, maxScrollX ->
+            allDataView?.setGapX(30.0f / 18)
+            allDataView?.setScrollRange(scrollX, maxScrollX)
         }
     }
 }

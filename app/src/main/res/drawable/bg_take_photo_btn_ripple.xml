@@ -4,12 +4,7 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <gradient
-                        android:angle="135"
-                        android:centerColor="#42A5F5"
-                        android:endColor="#1565C0"
-                        android:startColor="#42A5F5"
-                        android:type="linear" />
+                    <solid android:color="#CC000000" />
                 </shape>
             </item>
             <item
@@ -18,7 +13,7 @@
                 android:right="4dp"
                 android:top="4dp">
                 <shape android:shape="oval">
-                    <solid android:color="#1976D2" />
+                    <solid android:color="#A6000000" />
                 </shape>
             </item>
         </layer-list>
@@ -27,12 +22,7 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-                    <gradient
-                        android:angle="135"
-                        android:centerColor="#42A5F5"
-                        android:endColor="#1E88E5"
-                        android:startColor="#64B5F6"
-                        android:type="linear" />
+                    <solid android:color="#B3000000" />
                 </shape>
             </item>
             <item
@@ -41,7 +31,7 @@
                 android:right="4dp"
                 android:top="4dp">
                 <shape android:shape="oval">
-                    <solid android:color="#2196F3" />
+                    <solid android:color="#80000000" />
                 </shape>
             </item>
         </layer-list>

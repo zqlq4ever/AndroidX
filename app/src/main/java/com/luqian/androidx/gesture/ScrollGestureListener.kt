@@ -1,6 +1,5 @@
 package com.luqian.androidx.gesture
 
-import android.graphics.RectF
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -27,6 +26,9 @@ class ScrollGestureListener internal constructor(private val targetView: View, p
     private var maxTranslationRight = 0f
     private var maxTranslationBottom = 0f
     var isFullGroup = false
+
+    // 复用 RectF 对象，避免每次点击都创建新对象
+    private val tapRect = android.graphics.RectF()
 
 
     override fun onScroll(e1: MotionEvent?, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
@@ -199,8 +201,9 @@ class ScrollGestureListener internal constructor(private val targetView: View, p
         else
             viewGroup.height - (viewGroup.height - targetView.bottom - (viewHeightReal - viewHeightNormal) / 2)
 
-        val rectF = RectF(left, top, right, bottom)
-        if (rectF.contains(event.x, event.y)) {
+        // 使用复用的 RectF 对象，避免频繁创建对象
+        tapRect.set(left, top, right, bottom)
+        if (tapRect.contains(event.x, event.y)) {
             targetView.performClick()
         }
 

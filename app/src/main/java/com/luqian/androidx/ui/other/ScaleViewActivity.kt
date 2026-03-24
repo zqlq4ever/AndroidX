@@ -17,6 +17,7 @@ class ScaleViewActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityScaleBinding
+    private var gestureScaleHelper: GestureScaleHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +26,16 @@ class ScaleViewActivity : AppCompatActivity() {
         WaterMarkUtil.sInstance.show(binding.root, TimeUtils.date2String(TimeUtils.getNowDate()))
         binding.child.load(url)
 
-        GestureScaleHelper.bind(this, binding.root, binding.child).run {
+        gestureScaleHelper = GestureScaleHelper.bind(this, binding.root, binding.child).apply {
             isFullGroup = true
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 释放资源，防止内存泄漏
+        gestureScaleHelper?.release()
+        gestureScaleHelper = null
     }
 
 }

@@ -1,17 +1,16 @@
 package com.luqian.androidx.widget.ecgview
 
 import android.content.Context
+import android.graphics.BlurMaskFilter
 import android.graphics.Canvas
-import android.graphics.DashPathEffect
 import android.graphics.Paint
 import android.graphics.Path
-import android.graphics.PathEffect
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.luqian.androidx.R
-import kotlin.math.ceil
 
 class ScrollEcgView @JvmOverloads constructor(
     context: Context,
@@ -32,8 +31,6 @@ class ScrollEcgView @JvmOverloads constructor(
         private const val RECT_HEIGHT = 80
         private const val DATA_NUM_PER_GRID = 18
         private const val GAP_GRID = 30.0f
-        private val DASH_PATTERN = floatArrayOf(2f, 6f)
-        private val DASH_PATTERN_MAJOR = floatArrayOf(6f, 4f)
     }
 
     private var gapGrid = 0f
@@ -67,14 +64,8 @@ class ScrollEcgView @JvmOverloads constructor(
         strokeWidth = 2.5f
         strokeCap = Paint.Cap.ROUND
         strokeJoin = Paint.Join.ROUND
-    }
-
-    private val glowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.STROKE
-        color = ContextCompat.getColor(context, R.color.ecg_green_glow)
-        strokeWidth = 8.0f
-        strokeCap = Paint.Cap.ROUND
-        strokeJoin = Paint.Join.ROUND
+        // 使用 BlurMaskFilter 实现发光效果，避免双层绘制
+        maskFilter = BlurMaskFilter(6f, BlurMaskFilter.Blur.NORMAL)
     }
 
     private val rectPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -83,12 +74,13 @@ class ScrollEcgView @JvmOverloads constructor(
         strokeWidth = 1.0f
     }
 
-    private val gridPath = Path()
     private val ecgPath = Path()
-    private val rectPath = Path()
 
-    private val dashPathEffect: PathEffect = DashPathEffect(DASH_PATTERN, 1f)
-    private val dashPathEffectMajor: PathEffect = DashPathEffect(DASH_PATTERN_MAJOR, 1f)
+    // 使用 EcgGridHelper 统一处理网格绘制
+    private val gridHelper = EcgGridHelper()
+
+    // 复用 RectF 对象，避免每次绘制创建
+    private val rectF = RectF()
 
     init {
         setBackgroundColor(ContextCompat.getColor(context, R.color.black))
@@ -110,6 +102,9 @@ class ScrollEcgView @JvmOverloads constructor(
             rectGapX = viewWidth.toFloat() / dataNum
             rectWidth = viewWidth.toFloat() * viewWidth / (gapX * dataNum)
             multipleForRectWidth = viewWidth.toFloat() / rectWidth
+
+            // 尺寸变化时清除网格缓存
+            gridHelper.clearCache()
         }
         super.onLayout(changed, left, top, right, bottom)
     }
@@ -121,29 +116,15 @@ class ScrollEcgView @JvmOverloads constructor(
     }
 
     private fun drawGrid(canvas: Canvas) {
-        val offsetY = (viewHeight - gridHori * gapGrid) / 2
-        for (i in 1 until gridHori + 2) {
-            val y = gapGrid * (i - 1) + offsetY
-            val isMajor = i % 5 == 0
-            gridPath.reset()
-            gridPath.moveTo(xori.toFloat(), y)
-            gridPath.lineTo(viewWidth.toFloat(), y)
-            gridPaint.pathEffect = if (isMajor) dashPathEffectMajor else dashPathEffect
-            gridPaint.strokeWidth = if (isMajor) 1.5f else 1.0f
-            canvas.drawPath(gridPath, gridPaint)
-        }
+        val (minorPath, majorPath) = gridHelper.getGridPaths(viewWidth, viewHeight, gapGrid)
 
-        val offsetX = (viewWidth - gridVer * gapGrid) / 2
-        for (i in 1 until gridVer + 2) {
-            val x = gapGrid * (i - 1) + offsetX
-            val isMajor = i % 5 == 0
-            gridPath.reset()
-            gridPath.moveTo(x, 0f)
-            gridPath.lineTo(x, viewHeight.toFloat())
-            gridPaint.pathEffect = if (isMajor) dashPathEffectMajor else dashPathEffect
-            gridPaint.strokeWidth = if (isMajor) 1.5f else 1.0f
-            canvas.drawPath(gridPath, gridPaint)
-        }
+        // 绘制次网格线
+        gridHelper.configureMinorGridPaint(gridPaint, ContextCompat.getColor(context, R.color.cyan_200))
+        canvas.drawPath(minorPath, gridPaint)
+
+        // 绘制主网格线
+        gridHelper.configureMajorGridPaint(gridPaint, ContextCompat.getColor(context, R.color.cyan_200))
+        canvas.drawPath(majorPath, gridPaint)
     }
 
     private fun drawECGWave(canvas: Canvas) {
@@ -174,16 +155,18 @@ class ScrollEcgView @JvmOverloads constructor(
             }
         }
 
-        canvas.drawPath(ecgPath, glowPaint)
+        // 单层绘制实现发光效果（通过 BlurMaskFilter）
         canvas.drawPath(ecgPath, ecgPaint)
 
-        rectPath.reset()
+        // 使用 RectF 替代 Path 绘制底部指示器，性能更好
         val rectXori = (0f - xChanged) / multipleForRectWidth
-        rectPath.moveTo(rectXori, viewHeight - RECT_HEIGHT - 20f)
-        rectPath.lineTo(rectXori + rectWidth, viewHeight - RECT_HEIGHT - 20f)
-        rectPath.lineTo(rectXori + rectWidth, viewHeight.toFloat())
-        rectPath.lineTo(rectXori, viewHeight.toFloat())
-        canvas.drawPath(rectPath, rectPaint)
+        rectF.set(
+            rectXori,
+            viewHeight - RECT_HEIGHT - 20f,
+            rectXori + rectWidth,
+            viewHeight.toFloat()
+        )
+        canvas.drawRect(rectF, rectPaint)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -212,16 +195,46 @@ class ScrollEcgView @JvmOverloads constructor(
         return yInt * 3 / 4f + yCenter
     }
 
+    // 缓存转换后的数据，避免重复转换
+    private var cachedStringData: ArrayList<String>? = null
+    private var cachedIntData: ArrayList<Int>? = null
+
     fun setData(data: ArrayList<String>?) {
+        // 避免重复转换相同数据
+        if (data === cachedStringData) return
+        cachedStringData = data
+        cachedIntData = null
+
         dataSource = data?.map { s ->
             s.toIntOrNull() ?: 2048
+        }
+        dataNum = dataSource?.size ?: 0
+        // 数据变化时重新计算相关参数
+        if (viewWidth > 0 && dataNum > 0) {
+            offsetXMax = viewWidth - gapX * dataNum
+            rectGapX = viewWidth.toFloat() / dataNum
+            rectWidth = viewWidth.toFloat() * viewWidth / (gapX * dataNum)
+            multipleForRectWidth = viewWidth.toFloat() / rectWidth
         }
         invalidate()
         post { notifyScrollChanged() }
     }
 
     fun setIntegerData(data: ArrayList<Int>?) {
+        // 避免重复设置相同数据
+        if (data === cachedIntData) return
+        cachedIntData = data
+        cachedStringData = null
+
         dataSource = data?.toList()
+        dataNum = dataSource?.size ?: 0
+        // 数据变化时重新计算相关参数
+        if (viewWidth > 0 && dataNum > 0) {
+            offsetXMax = viewWidth - gapX * dataNum
+            rectGapX = viewWidth.toFloat() / dataNum
+            rectWidth = viewWidth.toFloat() * viewWidth / (gapX * dataNum)
+            multipleForRectWidth = viewWidth.toFloat() / rectWidth
+        }
         invalidate()
         post { notifyScrollChanged() }
     }

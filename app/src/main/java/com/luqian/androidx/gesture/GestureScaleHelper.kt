@@ -23,6 +23,9 @@ class GestureScaleHelper private constructor(
     private var onScaleListener: OnScaleListener? = null
     private var isScaleEnd = true
 
+    // 用于管理 ViewTreeObserver 监听，防止内存泄漏
+    private var preDrawListener: ViewTreeObserver.OnPreDrawListener? = null
+
     var isFullGroup = false
         set(isFullGroup) {
             field = isFullGroup
@@ -52,9 +55,7 @@ class GestureScaleHelper private constructor(
                     scaleGestureListener.onActionUp()
                 }
                 scrollGestureListener.setScale(scaleGestureListener.scale)
-                if (onScaleListener != null) {
-                    onScaleListener!!.onScale(scaleGestureListener.scale)
-                }
+                onScaleListener?.onScale(scaleGestureListener.scale)
                 return@OnTouchListener scaleGestureBinder.onTouchEvent(event)
             }
             false
@@ -63,28 +64,49 @@ class GestureScaleHelper private constructor(
 
 
     private fun fullGroup() {
-        targetView.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    targetView.viewTreeObserver.removeOnPreDrawListener(this)
-                    val targetWidth = targetView.width.toFloat()
-                    val targetHeight = targetView.height.toFloat()
-                    val groupWidth = viewGroup.width.toFloat()
-                    val groupHeight = viewGroup.height.toFloat()
-                    val widthFactor = groupWidth / targetWidth
-                    val heightFactor = groupHeight / targetHeight
-                    targetView.layoutParams = targetView.layoutParams.also {
-                        if (targetWidth < groupWidth && widthFactor * targetHeight <= groupHeight) {
-                            it.width = groupWidth.toInt()
-                            it.height = (widthFactor * targetHeight).toInt()
-                        } else if (targetHeight < groupHeight && heightFactor * targetWidth <= groupWidth) {
-                            it.height = groupHeight.toInt()
-                            it.width = (heightFactor * targetWidth).toInt()
-                        }
+        // 先移除旧的监听，防止重复添加导致内存泄漏
+        preDrawListener?.let {
+            targetView.viewTreeObserver.removeOnPreDrawListener(it)
+        }
+
+        preDrawListener = object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                targetView.viewTreeObserver.removeOnPreDrawListener(this)
+                preDrawListener = null
+                val targetWidth = targetView.width.toFloat()
+                val targetHeight = targetView.height.toFloat()
+                val groupWidth = viewGroup.width.toFloat()
+                val groupHeight = viewGroup.height.toFloat()
+                val widthFactor = groupWidth / targetWidth
+                val heightFactor = groupHeight / targetHeight
+                targetView.layoutParams = targetView.layoutParams.also {
+                    if (targetWidth < groupWidth && widthFactor * targetHeight <= groupHeight) {
+                        it.width = groupWidth.toInt()
+                        it.height = (widthFactor * targetHeight).toInt()
+                    } else if (targetHeight < groupHeight && heightFactor * targetWidth <= groupWidth) {
+                        it.height = groupHeight.toInt()
+                        it.width = (heightFactor * targetWidth).toInt()
                     }
-                    return true
                 }
-            })
+                return true
+            }
+        }.also {
+            targetView.viewTreeObserver.addOnPreDrawListener(it)
+        }
+    }
+
+
+    /**
+     * 释放资源，防止内存泄漏
+     * 建议在 Activity/Fragment 的 onDestroy 中调用
+     */
+    fun release() {
+        preDrawListener?.let {
+            targetView.viewTreeObserver.removeOnPreDrawListener(it)
+            preDrawListener = null
+        }
+        onScaleListener = null
+        viewGroup.setOnTouchListener(null)
     }
 
 
@@ -96,4 +118,5 @@ class GestureScaleHelper private constructor(
     fun setOnScaleListener(onScaleListener: OnScaleListener?) {
         this.onScaleListener = onScaleListener
     }
+
 }

@@ -30,6 +30,7 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
     override val enableEventBus = true
 
     private var mReceiver: WifiBroadCastReceiver? = null
+    private var isReceiverRegistered = false
     private var mAdapter: WifiAdapter? = null
     private var mInputWifiPsdPop: InputWifiPsdPop? = null
     private var mScanList: List<ScanResult>? = null
@@ -90,7 +91,12 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mReceiver?.let { unregisterReceiver(it) }
+        dismiss()
+        mInputWifiPsdPop = null
+        if (isReceiverRegistered) {
+            mReceiver?.let { unregisterReceiver(it) }
+            isReceiverRegistered = false
+        }
         stopRefreshAnimation()
     }
 
@@ -102,7 +108,7 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
                 .hasNavigationBar(false)
                 .dismissOnTouchOutside(true)
                 .popupAnimation(PopupAnimation.NoAnimation)
-                .asCustom(InputWifiPsdPop(this)) as InputWifiPsdPop
+                .asCustom(InputWifiPsdPop(this) { connect(it) }) as InputWifiPsdPop
         }
         mInputWifiPsdPop?.show()
     }
@@ -128,6 +134,7 @@ class WifiActivity : BaseVmActivity<WifiViewModel, ActivityWifiBinding>() {
         }
         mReceiver = WifiBroadCastReceiver()
         registerReceiver(mReceiver, filter)
+        isReceiverRegistered = true
     }
 
     private fun requestPermission() {

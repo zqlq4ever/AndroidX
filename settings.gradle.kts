@@ -3,12 +3,10 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
-        // 添加阿里云 maven 地址
-        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
-
         google()
         mavenCentral()
+        // 添加阿里云 maven 地址（按需保留，用于网络环境较差时加速）
+        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
         maven { url = uri("https://jitpack.io") }
     }
 }
@@ -16,12 +14,10 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        //  加阿里云 maven 地址
-        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
-
         google()
         mavenCentral()
+        //  加阿里云 maven 地址（按需保留，用于网络环境较差时加速）
+        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
         maven { url = uri("https://jitpack.io") }
     }
 }

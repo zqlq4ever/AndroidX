@@ -1,10 +1,10 @@
 package com.luqian.androidx.widget
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import android.widget.EditText
 import com.luqian.androidx.R
-import com.luqian.androidx.ui.wifi.WifiActivity
 import com.lxj.xpopup.core.CenterPopupView
 
 /**
@@ -12,7 +12,10 @@ import com.lxj.xpopup.core.CenterPopupView
  * @date 2021/6/28
  */
 @SuppressLint("ViewConstructor")
-class InputWifiPsdPop(private val context: WifiActivity) : CenterPopupView(context) {
+class InputWifiPsdPop(
+    context: Context,
+    private val onConnect: (String) -> Unit,
+) : CenterPopupView(context) {
 
     private var mEtWifiPsd: EditText? = null
 
@@ -28,7 +31,7 @@ class InputWifiPsdPop(private val context: WifiActivity) : CenterPopupView(conte
         super.onCreate()
         mEtWifiPsd = findViewById(R.id.et_wifi_psd)
         findViewById<View>(R.id.tv_connect).setOnClickListener { v: View? ->
-            context.connect(password)
+            onConnect(password)
             dismiss()
         }
     }

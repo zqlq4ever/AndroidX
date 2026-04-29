@@ -85,8 +85,15 @@ class WaveView @JvmOverloads constructor(
      */
     fun stopImmediately() {
         mIsRunning = false
+        removeCallbacks(mCreateCircle)
         mCircleList.clear()
         invalidate()
+    }
+
+    override fun onDetachedFromWindow() {
+        mIsRunning = false
+        removeCallbacks(mCreateCircle)
+        super.onDetachedFromWindow()
     }
 
     override fun onDraw(canvas: Canvas) {

@@ -19,3 +19,23 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+## ARouter
+-keep class com.alibaba.android.arouter.routes.** { *; }
+-keep interface com.alibaba.android.arouter.facade.template.** { *; }
+
+## EventBus
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+## AgentWeb (WebView related)
+-keep class com.just.agentweb.** { *; }
+
+## AgentWeb optional integrations (not bundled in this demo)
+-dontwarn com.alipay.sdk.**
+-dontwarn com.download.library.**
+
+## ARouter model types (annotation-related, not present on Android runtime)
+-dontwarn javax.lang.model.**

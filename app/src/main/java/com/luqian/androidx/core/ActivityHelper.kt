@@ -35,12 +35,20 @@ object ActivityHelper {
         clazz: Class<out Activity>,
         params: Map<String, Any> = emptyMap(),
     ) {
-        val currentActivity = activities[activities.lastIndex]
-        val intent = Intent(currentActivity, clazz)
+        val currentActivity = activities.lastOrNull()
+        val intent = if (currentActivity != null) {
+            Intent(currentActivity, clazz)
+        } else {
+            Intent(applicationContext, clazz).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         params.forEach {
             intent.putExtras(it.key to it.value)
         }
-        currentActivity.startActivity(intent)
+        if (currentActivity != null) {
+            currentActivity.startActivity(intent)
+        } else {
+            applicationContext.startActivity(intent)
+        }
     }
 
     @JvmOverloads
@@ -76,9 +84,9 @@ object ActivityHelper {
      * finish指定的一个或多个Activity
      */
     fun finish(vararg clazz: Class<out Activity>) {
-        activities.forEach { activiy ->
-            if (clazz.contains(activiy::class.java)) {
-                activiy.finish()
+        activities.toList().forEach { activity ->
+            if (clazz.contains(activity::class.java)) {
+                activity.finish()
             }
         }
     }

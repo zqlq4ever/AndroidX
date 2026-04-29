@@ -28,7 +28,6 @@ abstract class TestDatabase : RoomDatabase() {
                 TestDatabase::class.java,
                 "database_test"
             )
-                .allowMainThreadQueries()
                 .build()
         }
     }

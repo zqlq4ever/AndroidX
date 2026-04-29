@@ -26,7 +26,8 @@ open class BaseApplication : Application() {
         }
         // 尽可能早，推荐在 Application 中初始化
         ARouter.init(this)
-        XLog.init(LogLevel.ALL)
+        val logLevel = if (BuildConfig.DEBUG) LogLevel.ALL else LogLevel.WARN
+        XLog.init(logLevel)
         MMKV.initialize(this)
     }
 

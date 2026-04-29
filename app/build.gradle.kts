@@ -13,17 +13,12 @@ android {
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["room.schemaLocation"] = "$projectDir/schemas"
-            }
-        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -40,6 +35,10 @@ android {
     }
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     implementation(project(":base"))
@@ -53,7 +52,14 @@ dependencies {
     implementation(libs.persistentcookiejar)
     implementation(libs.banner)
     implementation(libs.androidutilcode)
-    annotationProcessor(libs.glide.compiler)
+
+    // 这些依赖在 app 源码里有直接使用（不再由 :base 透传）
+    implementation(libs.bundles.coil)
+    implementation(libs.xlog)
+    implementation(libs.eventbus)
+    implementation(libs.permissionx)
+    implementation(libs.xpopup)
+    implementation(libs.brvha)
 
     implementation(libs.bundles.camerax)
 }

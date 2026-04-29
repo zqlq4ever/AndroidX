@@ -51,7 +51,7 @@ camerax = "1.5.3"
 annotation = "1.9.1"
 rxjava2 = "2.2.21"
 rxandroid = "2.1.1"
-ksp = "2.3.6"
+ksp = "2.3.7"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
